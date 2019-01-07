@@ -1,0 +1,230 @@
+@extends('layouts.page')
+
+@section('css')
+<link href="/plugins/chosen_v1.8.7/chosen.min.css" rel="stylesheet" >
+<link href="/assets/vendor/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" >
+<style>
+    #search-form input{background: #fff;width: 150px;text-align:center;}
+    .input-daterange{border-left: solid 1px #ddd;border-top-left-radius: 8px;border-bottom-left-radius: 8px;}
+</style>
+@endsection
+
+@section('content')
+
+<div class="row">
+    <div class="col-sm-6">
+        <form id="search-form">
+            <div class="form-group">
+                <label class="col-md-3 control-label text-center"><h5 style="font-weight:bold;">Date range</h5></label>
+                <div class="col-md-6">
+                    <div class="input-daterange input-group" data-plugin-datepicker="">
+                        <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                        </span>
+                        <input type="text" class="form-control" name="startd" readonly="" value="{{$searchDateRange[0]}}">
+                        <span class="input-group-addon">to</span>
+                        <input type="text" class="form-control" name="endd" readonly="" value="{{$searchDateRange[1]}}">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-6 text-right">
+        <button class="btn btn-primary create-trigger" data-toggle="modal" data-target=".interview-modal">
+            Add New Interview
+            <i class="fa fa-plus"></i>
+        </button>
+    </div>
+</div>
+
+@foreach  ($interviewList as $i=>$v)
+<?php if($i%3==0){echo ($i?'</div>':'').'<div class="row">';}?>
+<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+    <div class="interview-list ">
+        <div class="interview-head">
+            <h3 class="text-center interview-{{$v->id}}">{{$v->name}}</h3>
+            <div class="interview-thumbnail">
+                <div class="interview-thumbnail-inner">
+                    <img src="/{{$v->preview_image?$v->preview_image:'app/interview_image/no-image.png'}}">
+                </div>
+            </div>
+        </div>
+        <div class="inerview-body">
+            <h5 class='it-candidate'>Candidate : <a href='/admin/candidate?search-select={{$v->id}}' title="{{$v->candidateListTxt}}">{{$v->cc?($v->cc.' people'):'not yet'}}</a>, By <span> {{strtotime($v->ctt)?$v->ctt:''}}</span></h5>
+            <h5 class='it-assessor' ass='{{$v->ass}}'>Assessor : <a href='/admin/assessor?search-select={{$v->id}}' title="{{$v->assessorListTxt}}">{{$v->ac?($v->ac.' people'):'not yet'}}</a>, By <span>{{strtotime($v->att)?$v->att:''}}</span></h5>
+            <p class="it-description">{{$v->description}}</p>
+            <div class="text-center">
+                <button class="btn btn-warning update-trigger" _iid="{{$v->id}}"  data-toggle="modal" data-target=".interview-modal" title="Edit name of the Interview, assessor, description">Edit</button>
+                <a class="btn btn-success" href="/admin/quiz?it={{$v->id}}" title="Edit Questions,time duration etc">Question</a>
+                <button class="btn btn-danger delete-trigger" _iid="{{$v->id}}" title="Delete interview also will remove associated quizes too">Delete</button>
+                <a class="btn btn-info" href="/admin/review?search-select={{$v->id}}" title="Explor interview result/reviews">Result</a>
+                <!--<a class="btn btn-danger" href="/admin/interview/toggle?it={{$v->id}}" title="{{intval($v->active_status)?'Currently actived':'Currently inactived'}}">{{intval($v->active_status)?'Inactive':'Active'}}</a>-->
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+
+<?php if(isset($i)){echo '</div>';}?>
+<div class="modal interview-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Interview</h5>
+            </div>
+            <div class="modal-body">
+                <form id="create-interview-form" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="interview_id">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" class="form-control" placeholder required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Instruction</label>
+                                <textarea class="form-control" name="description" placeholder rows="2" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row m-sm">
+                        <div class="col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" style="position:relative;">
+                                    <button class="btn btn-info btn-xs" onclick="document.getElementById('preview_image').click();return false;">
+                                        Choose
+                                    </button>
+                                    Preview Image
+                                    <input id="preview_image" name="preview_image" type="file" style="visibility:hidden;position: absolute;top: 0;" accept="image/*" title="Choose interview preview image">
+                                </label>
+                                <br>
+                                <img class="preview-img " src="/app/interview_image/no-image.png">
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Candidate Time Period</label>
+                                <div class="input-daterange input-group" data-plugin-datepicker>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" class="form-control" name="ctt" data-date-format="yyyy-mm-dd" autocomplete="off" readonly required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label text-right">Assessor Time Period</label>
+                                <div class="input-daterange input-group" data-plugin-datepicker>
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text" class="form-control" name="att" data-date-format="yyyy-mm-dd" autocomplete="off" readonly required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Assessor</label>
+                                <select name="assessor[]" data-placeholder="Choose assessor..." class="form-control assessor-selector" multiple>
+                                    <option></option>
+                                    @foreach($assessors as $ass)
+                                    <option value="{{$ass->id}}">{{$ass->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="Create" form="create-interview-form">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('scripts')
+<script src="/plugins/chosen_v1.8.7/chosen.jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+    $('select[name="assessor[]"]').chosen({width: "95%"})
+
+    $('.update-trigger').click(function (e) {
+        $('.interview-modal .modal-title').text('Update Interview');
+        $('.interview-modal input[type="submit"]').val('Update');
+        $('#create-interview-form input[name="interview_id"]').val($(this).attr('_iid'));
+        $('#create-interview-form input[name="name"]').val($('.interview-' + $(this).attr('_iid')).text());
+        $('#create-interview-form textarea[name="description"]').val($(this).parent().siblings('.it-description').html());
+        $('#create-interview-form select[name="assessor[]"]').val($(this).parent().siblings('.it-assessor').attr('ass').split(','));
+
+        var att = $('span', $(this).parent().siblings('.it-assessor')).text();
+        var ctt = $('span', $(this).parent().siblings('.it-candidate')).text();
+
+        $('input[name="att"]').datepicker("setDate", att);
+        $('input[name="ctt"]').datepicker("setDate", ctt);
+
+        $('select[name="assessor[]"]').chosen().trigger("chosen:updated");
+    });
+
+    $('.create-trigger').click(function (e) {
+        $('.interview-modal .modal-title').text('Create Interview');
+        $('.interview-modal input[type="submit"]').val('Create');
+        $('#create-interview-form input[name="interview_id"]').val('');
+        $('#create-interview-form').trigger('reset');
+        $('#create-interview-form select[name="assessor[]"]').val([]);
+        $('select[name="assessor[]"]').chosen().trigger("chosen:updated");
+    });
+
+    $('.delete-trigger').click(function (e) {
+        if (!confirm('Are you sure delete this interview?'))
+            return;
+
+        $.get('/admin/interview/delete', {id: $(this).attr('_iid')}, function (id) {
+            location.reload();
+        });
+    });
+
+    $('#preview_image').change(function () {
+        var input = this;
+        var url = $(this).val();
+        var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+        if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg"))
+        {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.preview-img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else
+        {
+            $('.preview-img').attr('src', '/app/interview_image/no-image.png');
+        }
+    });
+
+    $('#create-interview-form').submit(function(){
+        if(!$('input[name="ctt"]').val()){
+            alert('Please set time period for candidates.');
+            return false;
+        }
+
+        if(!$('input[name="att"]').val()){
+            alert('Please set time period for assessors.');
+            return false;
+        }
+
+        return true;
+    })
+    
+    $('input[name=startd],input[name=endd]').change(function(){
+        $('#search-form').submit();
+    })
+</script>
+@endsection

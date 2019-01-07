@@ -1,0 +1,235 @@
+/*varialbles*/
+a {
+  outline: none; }
+
+a:hover {
+  text-decoration: none;
+  cursor: pointer; }
+
+/*pre-header*/
+.pre-header {
+  background: #003C78;
+  border-bottom: solid 1px #00366c; }
+  .pre-header h6 {
+    color: #fff;
+    line-height: 33px;
+    margin: 0; }
+  .pre-header ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .pre-header ul li {
+      display: inline-block;
+      border-left: solid 1px #00366C;
+      height: 33px; }
+      .pre-header ul li a {
+        color: #fff;
+        text-decoration: none;
+        padding: 0px 10px;
+        line-height: 33px; }
+      .pre-header ul li a:hover {
+        color: goldenrod; }
+    .pre-header ul li:last-child {
+      border-right: solid 1px #002a54; }
+
+/*nabbar*/
+.navbar {
+  margin-bottom: 0; }
+  .navbar .logo {
+    outline: none;
+    line-height: 93px; }
+  .navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .navbar ul li {
+      display: inline-block;
+      height: 93px; }
+      .navbar ul li a {
+        color: #003c78;
+        text-decoration: none;
+        padding: 0px 10px;
+        line-height: 93px;
+        font-weight: bold; }
+      .navbar ul li a:hover {
+        color: goldenrod; }
+      .navbar ul li a.my-account {
+        color: #fff;
+        padding: 15px;
+        background-color: #ff3700;
+        /*border: solid 2px #ff6e47;*/
+        border-radius: 25px;
+        -webkit-border-radius: 25px;
+        -moz-border-radius: 25px; }
+      .navbar ul li a.my-account:hover {
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+        -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4); }
+
+.footer {
+  background: #003c78;
+  line-height: 85px; }
+  .footer h4 {
+    color: #fff;
+    line-height: 60px; }
+  .footer .list-inline {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .footer .list-inline .item .fa {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      padding-top: 9px;
+      font-size: 20px;
+      border-radius: 50%;
+      text-decoration: none;
+      text-align: center;
+      font: normal normal normal 14px/1 FontAwesome;
+      color: #003c78; }
+    .footer .list-inline .item .fa:hover {
+      background: #fff; }
+    .footer .list-inline .item .fa-facebook {
+      background: #3a589b; }
+    .footer .list-inline .item .fa-twitter {
+      background: #598dca; }
+    .footer .list-inline .item .fa-google-plus {
+      background: #d6492f; }
+    .footer .list-inline .item .fa-instagram {
+      background: #007ab9; }
+    .footer .list-inline .item .fa-youtube {
+      background: #cf3427; }
+
+/***************** front index page *********************/
+/*header*/
+.front-main .masthead {
+  position: relative;
+  background-color: #343a40;
+  background: url(../images/masthead.jpg) no-repeat center center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  height: 470px; }
+  .front-main .masthead .overlay {
+    position: absolute;
+    background-color: #000;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: .5; }
+  .front-main .masthead h1 {
+    font-size: 30px;
+    color: #fff;
+    position: relative; }
+  .front-main .masthead p {
+    position: relative; }
+    .front-main .masthead p a.demo-btn {
+      color: #fff;
+      padding: 15px 25px;
+      font-weight: bold;
+      background-color: #ff3700;
+      border-radius: 25px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      margin-top: 40px;
+      display: inline-block;
+      border: solid 2px #ccc;
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+      -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4); }
+    .front-main .masthead p a.demo-btn:hover {
+      box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.6);
+      -webkit-box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.6);
+      -moz-box-shadow: 3px 3px 10px rgba(255, 255, 255, 0.6); }
+
+/*process*/
+.front-main .process h1 {
+  margin: 40px; }
+.front-main .process h4 {
+  margin: 15px 0; }
+
+/*summary*/
+.front-main .summary {
+  margin-top: 40px;
+  padding: 40px 30px;
+  background: #003c78;
+  color: #fff; }
+  .front-main .summary img {
+    float: right;
+    width: 100%;
+    margin-left: 30px; }
+
+/*testimonials*/
+.front-main .testimonials {
+  background: #f1f1f1;
+  padding-bottom: 20px; }
+  .front-main .testimonials h3 {
+    padding: 20px 0 10px 0;
+    color: #003c78;
+    text-align: left; }
+  .front-main .testimonials .item {
+    background: #fff;
+    /*border:solid 1px #ccc;*/
+    padding: 20px 15px 20px 20px; }
+    .front-main .testimonials .item p {
+      font-size: 15px;
+      text-align: left;
+      position: relative;
+      height: 80px; }
+      .front-main .testimonials .item p img {
+        width: 80px;
+        height: 80px;
+        background: #ccc;
+        float: left;
+        margin-right: 15px;
+        border-radius: 50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%; }
+      .front-main .testimonials .item p .name {
+        padding-top: 10px;
+        display: block;
+        font-weight: bold; }
+      .front-main .testimonials .item p .job {
+        color: gray;
+        display: block;
+        font-size: 13px; }
+    .front-main .testimonials .item blockquote {
+      margin-top: 20px;
+      border-left: none;
+      font-size: 14px;
+      padding: 10px 0;
+      text-align: left; }
+
+/***************** front about us page *********************/
+/*header*/
+.about-us .masthead {
+  position: relative;
+  background-color: #343a40;
+  background: url(../images/masthead.jpg) no-repeat center center;
+  background-size: cover;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  height: 470px; }
+  .about-us .masthead .overlay {
+    position: absolute;
+    background-color: #000;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: .5; }
+  .about-us .masthead h1 {
+    font-size: 30px;
+    color: #fff;
+    position: relative; }
+
+/*process*/
+.about-us .process {
+  padding-bottom: 40px; }
+  .about-us .process h1 {
+    margin: 40px; }
+  .about-us .process h4 {
+    margin: 15px 0; }
+
+/*# sourceMappingURL=front.css.map */

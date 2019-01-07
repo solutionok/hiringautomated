@@ -1,0 +1,101 @@
+/*side bar*/
+ul.nav-main li.nav-active a {
+  box-shadow: 4px 0px 0px 0px #0088cc inset;
+  color: #0088cc;
+  font-weight: bold; }
+ul.nav-main li {
+  text-transform: uppercase; }
+  ul.nav-main li i {
+    color: #ddd; }
+  ul.nav-main li img {
+    width: 1.4em;
+    margin-right: 0.8em; }
+
+.header .search {
+  width: 500px; }
+
+.modal-header {
+  background: #0088cc;
+  color: #fff; }
+
+.modal-footer {
+  background: #f6f6f6; }
+
+/*inner page header*/
+.page-header .breadcrumbs {
+  padding-right: 15px; }
+
+/*dashboard page*/
+.dashboard-page .widget-summary .widget-summary-col .summary-icon img {
+  margin-top: -6px;
+  width: 40px; }
+
+/*interview page*/
+.interview-page .interview-list {
+  border: solid 1px #ddd;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  background: #fff;
+  box-shadow: 3px 3px 10px #ddd;
+  -webkit-box-shadow: 3px 3px 10px #ddd;
+  -moz-box-shadow: 3px 3px 10px #ddd; }
+  .interview-page .interview-list .interview-head {
+    background: #EEEEEE;
+    position: relative; }
+    .interview-page .interview-list .interview-head h3 {
+      padding: 10px 5px 50px 5px;
+      margin: 0px;
+      margin-bottom: 40px;
+      color: #333;
+      font-family: fantasy; }
+    .interview-page .interview-list .interview-head .interview-thumbnail {
+      position: absolute;
+      left: 0;
+      bottom: -40px;
+      width: 100%;
+      height: 80px;
+      text-align: center; }
+      .interview-page .interview-list .interview-head .interview-thumbnail .interview-thumbnail-inner {
+        border-radius: 50%;
+        border: solid 4px snow;
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        overflow: hidden;
+        margin: 0 auto;
+        background: #fff;
+        background: transparent; }
+        .interview-page .interview-list .interview-head .interview-thumbnail .interview-thumbnail-inner img {
+          width: 100%; }
+  .interview-page .interview-list .inerview-body {
+    padding: 10px; }
+    .interview-page .interview-list .inerview-body h5 {
+      border-bottom: dashed 1px; }
+    .interview-page .interview-list .inerview-body .it-assessor, .interview-page .interview-list .inerview-body .it-candidate {
+      text-transform: uppercase; }
+.interview-page .interview-modal img.preview-img {
+  height: 120px;
+  width: 120px;
+  border: solid 1px #f3f3f3; }
+.interview-page .interview-modal .input-daterange .input-group-addon {
+  border-left: solid 1px #ddd; }
+
+/*login page*/
+.login-body {
+  background-image: url("../images/login-back.jpg");
+  background-repeat: no-repeat; }
+  .login-body .login-logo {
+    display: block;
+    position: fixed;
+    left: 50px;
+    top: 20px; }
+
+@media (min-width: 768px) {
+  .login-body {
+    background-size: cover; } }
+@media (min-width: 1000px) {
+  .login-body {
+    background-size: 40% 100%; } }
+
+/*# sourceMappingURL=theme-custom.css.map */
