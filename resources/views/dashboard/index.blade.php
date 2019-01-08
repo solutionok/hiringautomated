@@ -14,7 +14,7 @@
                 <div class="widget-summary">
                     <div class="widget-summary-col widget-summary-col-icon">
                         <div class="summary-icon bg-primary">
-                            <img src="/assets/images/interview.png" aria-hidden="true" style="width:30px;height:30px;">
+                            <img src="/assets/images/interview.png" aria-hidden="true">
                         </div>
                     </div>
                     <div class="widget-summary-col">
@@ -129,7 +129,7 @@
                                 <td>{{$i+1}}</td>
                                 <td>
                                     <a href="/admin/review/{{$q->id}}">
-                                        <img src="/{{!empty($q->photo)?$q->photo:'app/candidate/user.jpg'}}">{{$q->candidaten}}
+                                        <img src="/{{!empty($q->photo)?$q->photo:'app/candidate/user.jpg'}}" style="width:20px;height:20px;">{{$q->candidaten}}
                                     </a>
                                 </td>
                                 <td>{{$q->interviewn}}</td>
