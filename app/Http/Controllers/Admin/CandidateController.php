@@ -12,6 +12,7 @@ use App\Models\InterviewCandidate;
 use App\Models\InterviewAssessor;
 use App\Models\InterviewHistory;
 use App\Models\Interview;
+use App\User;
 
 
 class CandidateController extends Controller
@@ -33,6 +34,7 @@ class CandidateController extends Controller
                     ->whereRaw($request->input('search-what','') 
                             ? ('(users.name like "%'.$request->input('search-what').'%" OR users.email like "%'.$request->input('search-what').'%" OR users.phone like "%'.$request->input('search-what').'%")')
                             : ('users.id>0'))
+                    ->groupBy('interview_candidate.candidate_id')
                     ->get();
         }else{
             $re = DB::table('users')
@@ -57,10 +59,13 @@ class CandidateController extends Controller
                         return $join->on('a.id', '=', 'b.interview_id')
                                 ->where('b.candidate_id', $r->id);
                     })
-                    ->leftJoin('interview_assessor as c', 'a.id', '=', 'c.interview_id')
+                    ->leftJoin('interview_candidate as c', function($join) use ($r){
+                        return $join->on('a.id', '=', 'c.interview_id')
+                                ->where('c.candidate_id', $r->id);
+                    })
                     ->whereIn('a.id',$itIds)
                     ->groupBy('a.id')
-                    ->select('a.name','b.*',DB::raw('group_concat(distinct c.assessor_id) as as_ids'))
+                    ->select('a.name','b.*','c.assessor_id as as_ids')
                     ->get();
             
             $r->interviewList = $interviewList;
@@ -306,7 +311,8 @@ class CandidateController extends Controller
         InterviewAssessor::firstOrNew(['interview_id'=>$interviewId, 'assessor_id'=>$assessorId])->save();
         
         foreach($request->candidateIds as $cid){
-            InterviewCandidate::firstOrNew(['interview_id'=>$interviewId, 'candidate_id'=>$cid])->save();
+            InterviewCandidate::where(['interview_id'=>$interviewId, 'candidate_id'=>$cid])->delete();
+            InterviewCandidate::insert(['interview_id'=>$interviewId, 'candidate_id'=>$cid, 'assessor_id'=>$assessorId]);
             
             /////////////////////
             $user = DB::table('users')->where('id',$cid)->first();
@@ -334,4 +340,13 @@ class CandidateController extends Controller
             die('<script>top.alert("CV saved!");top.location.reload();</script>');
         }
     }
+    
+    public function assessors($interviewId, Request $request){
+        if(!$interviewId)echo '[]';
+        $assessorIds = Interview::find($interviewId)->assessors->pluck('assessor_id');
+        $assessorIds[]=-1;
+        $assessors = User::find($assessorIds)->toArray();
+        echo json_encode($assessors);
+    }
+    
 }

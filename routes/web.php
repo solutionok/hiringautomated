@@ -84,6 +84,7 @@ Route::post('/admin/candidate/emailcheck', 'Admin\CandidateController@emailcheck
 Route::post('/admin/candidate/bulkadd', 'Admin\CandidateController@bulkadd')->middleware(['admin']);
 Route::post('/admin/candidate/assign', 'Admin\CandidateController@assignInterview')->middleware(['admin']);
 Route::post('/admin/candidate/uploadcv', 'Admin\CandidateController@uploadcv')->middleware(['admin']);
+Route::post('/admin/candidate/assessors/{interivewId}', 'Admin\CandidateController@assessors')->middleware(['admin']);
 
 Route::prefix('messenger')->group(function () {
     Route::get('t/{id}', 'MessageController@laravelMessenger')->name('messenger');

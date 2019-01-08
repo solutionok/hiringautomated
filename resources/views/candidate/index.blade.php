@@ -55,18 +55,13 @@
             <div class="panel-body">
                 <div class="btn-bar">
                     Checked candidates to 
-                    <select name="interview_id" id="interview_id" style="height:31px!important;padding: 0;">
-                        <option value=''></option>
+                    <select name="interview_id" id="interview_id" style="height:31px!important;padding: 0;width: 300px;">
+                        <option value=''>Choose Interview</option>
                         @foreach($interviews as $i=>$q)
                         <option value="{{$q->id}}">{{$q->name}}</option>
                         @endforeach
                     </select>
-                    <select name="assessor_id" id="assessor_id" style="height:31px!important;padding: 0;">
-                        <option value=''></option>
-                        @foreach($assesors as $i=>$q)
-                        <option value="{{$q->id}}">{{$q->name}}</option>
-                        @endforeach
-                    </select>
+                    <select name="assessor_id" id="assessor_id" style="height:31px!important;padding: 0;min-width: 100px;"></select>
                     <button class="btn btn-primary assign-interview" disabled>Assign</button>
                     <button onclick="document.getElementById('hidden-frame').src='/app/candidate_template.csv'" class="btn btn-primary">Download CSV</button>
                     <button onclick="document.getElementById('bulkadd').click()" class="btn btn-primary bulkadd">Upload CSV</button>
@@ -94,28 +89,19 @@
                                 <td>{{$q->email}}</td>
                                 <td>{{$q->phone}}</td>
                                 <td>
-                                    <table>
+                                    <ul style="list-style:none;padding:0;">
                                         @foreach($q->interviewList as $it)
-                                        <tr style="border-bottom:dashed 1px #555555">
-                                            <td style="padding:2px 4px">
-                                                <a href="{{empty($it->id)?'javascript:;':('/admin/review/'.$it->id)}}"
-                                                    title="{{isset($it->rundate)?('Completed interview at '.$it->rundate.', evaluated score ' . $it->grade):'No interview'}}"
-                                                    style="{{isset($it->rundate)?('color:green;'):'color:darkgray'}}"
-                                                    >
-                                                    {{$it->name}}
-                                                </a>
-                                            </td>
-                                            <td style="padding:2px 4px">
-                                                <a href="{{empty($it->as_ids)?'javascript:;':('/admin/assessor?search-select='.$it->id)}}"
-                                                    title="{{empty($it->as_ids)?('No assessor'):getAssesorNames($it->as_ids,$assesors, true)}}"
-                                                    style="{{empty($it->as_ids)?('color:darkgray;'):'color:green'}}"
-                                                    >
-                                                    {{empty($it->as_ids)?('No assessor'):getAssesorNames($it->as_ids,$assesors)}}
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        <li style="border-bottom:dashed 1px #555555">
+                                            <a href="{{empty($it->id)?'javascript:;':('/admin/review/'.$it->id)}}"
+                                                title="{{isset($it->rundate)?('Completed interview at '.$it->rundate.', evaluated score ' . $it->grade):'No interview'}}"
+                                                style="{{isset($it->rundate)?('color:green;'):'color:darkgray'}}"
+                                                >
+                                                {{$it->name}}
+                                                {{empty($it->as_ids)?('No assessor'):('('.getAssesorNames($it->as_ids,$assesors).')')}}
+                                            </a>
+                                        </li>
                                         @endforeach
-                                    </table>
+                                    </ul>
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group">
@@ -148,7 +134,7 @@
 <script src="/plugins/chosen_v1.8.7/chosen.jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 
-$('#interview_id,#assessor_id').chosen({width: "auto"})
+$('#interview_id').chosen()
 var Table = $('.table').dataTable();
 $('#bulkadd').change(function () {
     if (this.value) {
@@ -170,10 +156,6 @@ $('.delete-trigger').click(function () {
         }
     });
 
-});
-
-$('#interview_id,#assessor_id').change(function(){
-    $('.assign-interview').prop('disabled', !($('#interview_id').val()&&$('#assessor_id').val()));
 });
 
 $('.assign-interview').click(function(){
@@ -203,6 +185,18 @@ function bulkResult(re) {
 }
 $('.checked-candidate-all').click(function(){
     $('.checked-candidate').prop('checked', this.checked)
+})
+
+$('#interview_id').change(function(){
+    $('#assessor_id').empty();
+    $('.assign-interview').prop('disabled', true);
+    if(!this.value)return;
+    $.post('/admin/candidate/assessors/' + this.value,{_token:$('input[name=_token]').val()}, function(r){
+        for(var i=0; i<r.length; i++){
+            $('#assessor_id').append('<option value="' + r[i]['id'] + '">' + r[i]['name'] + '</option>');
+        }
+        $('.assign-interview').prop('disabled', !($('#interview_id').val()&&$('#assessor_id').val()));
+    },'json');
 })
 </script>
 @endsection

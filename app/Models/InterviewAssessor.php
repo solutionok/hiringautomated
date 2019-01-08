@@ -14,4 +14,12 @@ class InterviewAssessor extends Model
     
     const UPDATED_AT = null;
     const CREATED_AT = null;
+    
+    public function interview(){
+        return $this->belongsTo('App\Interview');
+    }
+    
+    public function user(){
+        return $this->hasOne('User','id','assessor_id');
+    }
 }

@@ -9,7 +9,7 @@ class InterviewCandidate extends Model
     protected $table = "interview_candidate";
     
     protected $fillable = [
-        'interview_id', 'candidate_id'
+        'interview_id', 'candidate_id', 'assessor_id'
     ];
     
     const UPDATED_AT = null;
