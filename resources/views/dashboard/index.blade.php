@@ -14,7 +14,7 @@
                 <div class="widget-summary">
                     <div class="widget-summary-col widget-summary-col-icon">
                         <div class="summary-icon bg-primary">
-                            <img src="/assets/images/interview.png" aria-hidden="true">
+                            <img src="/assets/images/interview.png" aria-hidden="true" style="width:30px;height:30px;">
                         </div>
                     </div>
                     <div class="widget-summary-col">
