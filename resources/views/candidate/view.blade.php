@@ -32,7 +32,7 @@
     <input type="file" name="cv-file" id="cv-file" accept=".pdf">
     <input type="hidden" name="candidate_id" value="{{@$user->id}}">
 </form>
-<iframe name="pass-save-frame" style="display:none;"></iframe>
+<iframe name="pass-save-frame" style="display:none;s"></iframe>
 <div class="row">
     <div class="col-sm-0 col-md-2"></div>
     <div class="col-sm-12 col-md-8">
