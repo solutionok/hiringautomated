@@ -92,57 +92,57 @@ border-radius: 2px;
         @endif
     </div>
 </div>
-<div class="row">
     
-    @foreach($history as $i=>$q)
-    <div class="col-md-4">
-        <div class="panel">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-sm-5 text-right">
-                        <img src="/{{$q->photo?$q->photo:'app/candidate/user.jpg'}}">
-                    </div>
-                    <div class="col-sm-7">
-                        <h5>{{$q->usern}}</h5>
-                        <p><i class="fa fa-envelope-square"></i> {{$q->email}}</p>
-                        <p><i class="fa fa-phone"></i> {{$q->phone}}</p>
-                    </div>
+@foreach($history as $i=>$q)
+<?php if($i%3==0){echo ($i?'</div>':'').'<div class="row">';}?>
+<div class="col-md-4">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-5 text-right">
+                    <img src="/{{$q->photo?$q->photo:'app/candidate/user.jpg'}}">
                 </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-5 text-right"><p>Interview</p></div>
-                    <div class="col-sm-7"><p>{{$q->interviewn}}</p></div>
+                <div class="col-sm-7">
+                    <h5>{{$q->usern}}</h5>
+                    <p><i class="fa fa-envelope-square"></i> {{$q->email}}</p>
+                    <p><i class="fa fa-phone"></i> {{$q->phone}}</p>
                 </div>
-                
-                <div class="row">
-                    <div class="col-sm-5 text-right"><p>Date</p></div>
-                    <div class="col-sm-7"><p>{{date('d.m.Y', strtotime($q->rundate))}}</p></div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-sm-5 text-right"><p>Score/Max Score</p></div>
-                    <div class="col-sm-7"><p>{{$q->grade}}/{{$q->availgrade}} &nbsp;&nbsp;&nbsp; <progress value="{{$q->grade}}" max="{{$q->availgrade}}"></progress></p></div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-5 text-right"><p>Close on</p></div>
-                    <div class="col-sm-7"><p>{{date('d.m.Y', strtotime($q->att))}}</p></div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-3 text-right"></div>
-                    <div class="col-sm-9">
-                        <a href="/admin/review/{{$q->id}}" class="btn btn-sm btn-{{deadlineCheck($q->att)?'primary':'dark'}}" title="{{auth()->user()->isadmin==2?'Evaluate score, review':'View review result, score, review so on'}}">{{deadlineCheck($q->att)?'View':'Deadline Over'}}</a>
-                        @if(auth()->user()->isadmin==1)
-                        <a href="/admin/candidate/view?id={{$q->candidate_id}}" class="btn btn-sm btn-primary" title="Go profile page">User Profile</a>
-                        @endif
-                    </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-5 text-right"><p>Interview</p></div>
+                <div class="col-sm-7"><p>{{$q->interviewn}}</p></div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-5 text-right"><p>Date</p></div>
+                <div class="col-sm-7"><p>{{date('d.m.Y', strtotime($q->rundate))}}</p></div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-5 text-right"><p>Score/Max Score</p></div>
+                <div class="col-sm-7"><p>{{$q->grade}}/{{$q->availgrade}} &nbsp;&nbsp;&nbsp; <progress value="{{$q->grade}}" max="{{$q->availgrade}}"></progress></p></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-5 text-right"><p>Close on</p></div>
+                <div class="col-sm-7"><p>{{date('d.m.Y', strtotime($q->att))}}</p></div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3 text-right"></div>
+                <div class="col-sm-9">
+                    <a href="/admin/review/{{$q->id}}" class="btn btn-sm btn-{{deadlineCheck($q->att)?'primary':'dark'}}" title="{{auth()->user()->isadmin==2?'Evaluate score, review':'View review result, score, review so on'}}">{{deadlineCheck($q->att)?'View':'Deadline Over'}}</a>
+                    @if(auth()->user()->isadmin==1)
+                    <a href="/admin/candidate/view?id={{$q->candidate_id}}" class="btn btn-sm btn-primary" title="Go profile page">User Profile</a>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
-    @endforeach
-
 </div>
+@endforeach
+
+<?php if(isset($i)){echo '</div>';}?>
 <iframe id="download-frame" class="hide"></iframe>
 @csrf
 @endsection

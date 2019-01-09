@@ -25,7 +25,7 @@ class DashboardController extends Controller
         $interviewIds[]=-1;
         $interviewHistoryIds = InterviewHistory::whereIn('interview_id', $interviewIds)->pluck('id')->toArray();
         $interviewHistoryIds[]=-1;
-        $reviewCount = Review::whereIn('interview_history_id', $interviewHistoryIds)->groupBy('interview_history_id','assessor_id')->count();
+        $reviewCount = InterviewHistory::count();
         $maxReview = InterviewHistory::count();
         $assessorCount = User::where('isadmin', 2)->count();
         $candidateCount = User::where('isadmin', 0)->count();
