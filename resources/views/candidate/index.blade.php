@@ -3,7 +3,7 @@
 <link href="/plugins/chosen_v1.8.7/chosen.min.css" rel="stylesheet" >
 <link rel="stylesheet" href="/assets/vendor/jquery-datatables-bs3/assets/css/datatables.css" />
 <style>
-    .panel img{width: 35px;height:35px; margin-right:10px;}
+    .panel img{width: 20px;height:20px; margin-right:10px;}
     
     .header .search{
         width: auto!important;
@@ -42,6 +42,12 @@
         -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
         transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     }
+    .dataTables_wrapper .dataTables_filter input{
+        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIiAgIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyIgICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgICB2ZXJzaW9uPSIxLjEiICAgaWQ9InN2ZzQ0ODUiICAgdmlld0JveD0iMCAwIDIxLjk5OTk5OSAyMS45OTk5OTkiICAgaGVpZ2h0PSIyMiIgICB3aWR0aD0iMjIiPiAgPGRlZnMgICAgIGlkPSJkZWZzNDQ4NyIgLz4gIDxtZXRhZGF0YSAgICAgaWQ9Im1ldGFkYXRhNDQ5MCI+ICAgIDxyZGY6UkRGPiAgICAgIDxjYzpXb3JrICAgICAgICAgcmRmOmFib3V0PSIiPiAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9zdmcreG1sPC9kYzpmb3JtYXQ+ICAgICAgICA8ZGM6dHlwZSAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4gICAgICAgIDxkYzp0aXRsZT48L2RjOnRpdGxlPiAgICAgIDwvY2M6V29yaz4gICAgPC9yZGY6UkRGPiAgPC9tZXRhZGF0YT4gIDxnICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLC0xMDMwLjM2MjIpIiAgICAgaWQ9ImxheWVyMSI+ICAgIDxnICAgICAgIHN0eWxlPSJvcGFjaXR5OjAuNSIgICAgICAgaWQ9ImcxNyIgICAgICAgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjAuNCw4NjYuMjQxMzQpIj4gICAgICA8cGF0aCAgICAgICAgIGlkPSJwYXRoMTkiICAgICAgICAgZD0ibSAtNTAuNSwxNzkuMSBjIC0yLjcsMCAtNC45LC0yLjIgLTQuOSwtNC45IDAsLTIuNyAyLjIsLTQuOSA0LjksLTQuOSAyLjcsMCA0LjksMi4yIDQuOSw0LjkgMCwyLjcgLTIuMiw0LjkgLTQuOSw0LjkgeiBtIDAsLTguOCBjIC0yLjIsMCAtMy45LDEuNyAtMy45LDMuOSAwLDIuMiAxLjcsMy45IDMuOSwzLjkgMi4yLDAgMy45LC0xLjcgMy45LC0zLjkgMCwtMi4yIC0xLjcsLTMuOSAtMy45LC0zLjkgeiIgICAgICAgICBjbGFzcz0ic3Q0IiAvPiAgICAgIDxyZWN0ICAgICAgICAgaWQ9InJlY3QyMSIgICAgICAgICBoZWlnaHQ9IjUiICAgICAgICAgd2lkdGg9IjAuODk5OTk5OTgiICAgICAgICAgY2xhc3M9InN0NCIgICAgICAgICB0cmFuc2Zvcm09Im1hdHJpeCgwLjY5NjQsLTAuNzE3NiwwLjcxNzYsMC42OTY0LC0xNDIuMzkzOCwyMS41MDE1KSIgICAgICAgICB5PSIxNzYuNjAwMDEiICAgICAgICAgeD0iLTQ2LjIwMDAwMSIgLz4gICAgPC9nPiAgPC9nPjwvc3ZnPg==);
+        background-repeat: no-repeat;
+        background-color: #fff;
+        background-position: 3px 6px !important;
+        padding-left: 25px;    }
 </style>
 @endsection
 @section('content')
@@ -54,17 +60,24 @@
             </div>
             <div class="panel-body">
                 <div class="btn-bar">
-                    Checked candidates to 
-                    <select name="interview_id" id="interview_id" style="height:31px!important;padding: 0;width: 300px;">
-                        <option value=''>Choose Interview</option>
+                    Assign Candidates to 
+                    <select name="interview_id" id="interview_id" data-placeholder="Select Interview" style="width: 300px;">
                         @foreach($interviews as $i=>$q)
                         <option value="{{$q->id}}">{{$q->name}}</option>
                         @endforeach
                     </select>
-                    <select name="assessor_id" id="assessor_id" style="height:31px!important;padding: 0;min-width: 100px;"></select>
+                    <select name="assessor_id" id="assessor_id" data-placeholder="Select assessor" style="min-width: 150px;"></select>
                     <button class="btn btn-primary assign-interview" disabled>Assign</button>
-                    <button onclick="document.getElementById('hidden-frame').src='/app/candidate_template.csv'" class="btn btn-primary">Download CSV</button>
-                    <button onclick="document.getElementById('bulkadd').click()" class="btn btn-primary bulkadd">Upload CSV</button>
+                    
+                    <div class="btn-group">
+                        <button type="button" class="mb-xs mt-xs mr-xs btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">CSV <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="javascript:;" onclick="downToCSV()">Download CSV</a></li>
+                            <li><a href="javascript:;" onclick="document.getElementById('bulkadd').click()" class="bulkadd">Upload CSV</a></li>
+                        </ul>
+                    </div>
+                    
+                    <button onclick="blukDelete()" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
                     <button onclick="location.href='/admin/candidate/view'" class="btn btn-primary">Add New <i class="fa fa-plus"></i></button>
                 </div>
                 <div class="table-responsive">
@@ -74,7 +87,7 @@
                         <th>Name</th>
                         <th>E-mail</th>
                         <th>Phone</th>
-                        <th>Interview</th>
+                        <th>Interview (Assessor)</th>
                         <th class="text-center">Action</th>
                         </thead>
                         <tbody>
@@ -91,13 +104,13 @@
                                 <td>
                                     <ul style="list-style:none;padding:0;">
                                         @foreach($q->interviewList as $it)
-                                        <li style="border-bottom:dashed 1px #555555">
+                                        <li style=" {{count($q->interviewList)==1?'':'border-bottom:dashed 1px #555555'}}">
                                             <a href="{{empty($it->id)?'javascript:;':('/admin/review/'.$it->id)}}"
-                                                title="{{isset($it->rundate)?('Completed interview at '.$it->rundate.', evaluated score ' . $it->grade):'No interview'}}"
+                                                title="{{isset($it->rundate)?('Completed interview at '.date('d.m.Y', strtotime($it->rundate)).', evaluated score ' . $it->grade):'No interview'}}"
                                                 style="{{isset($it->rundate)?('color:green;'):'color:darkgray'}}"
                                                 >
                                                 {{$it->name}}
-                                                {{empty($it->as_ids)?('No assessor'):('('.getAssesorNames($it->as_ids,$assesors).')')}}
+                                                ({{empty($it->as_ids)?('No assessor'):(getAssesorNames($it->as_ids,$assesors))}})
                                             </a>
                                         </li>
                                         @endforeach
@@ -134,8 +147,19 @@
 <script src="/plugins/chosen_v1.8.7/chosen.jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 
-$('#interview_id').chosen()
-var Table = $('.table').dataTable();
+$('#interview_id,#assessor_id').chosen()
+var Table = $('.table').dataTable({
+    "columnDefs": [
+        { "orderable": false, "targets": 0 },
+        { "orderable": false, "targets": 5 }
+      ]
+    ,  
+    "dom": '<"top"lf>t<"bottom"pi><"clear">',
+    select: true,
+    language: {
+        searchPlaceholder: "Search "
+    }
+});
 $('#bulkadd').change(function () {
     if (this.value) {
 
@@ -189,14 +213,36 @@ $('.checked-candidate-all').click(function(){
 
 $('#interview_id').change(function(){
     $('#assessor_id').empty();
+    $('#assessor_id').chosen('destroy');
     $('.assign-interview').prop('disabled', true);
     if(!this.value)return;
     $.post('/admin/candidate/assessors/' + this.value,{_token:$('input[name=_token]').val()}, function(r){
         for(var i=0; i<r.length; i++){
             $('#assessor_id').append('<option value="' + r[i]['id'] + '">' + r[i]['name'] + '</option>');
         }
+        
+        $('#assessor_id').chosen();
         $('.assign-interview').prop('disabled', !($('#interview_id').val()&&$('#assessor_id').val()));
     },'json');
-})
+}).change();
+function downToCSV(){
+    $('#hidden-frame').attr('src', '/admin/candidate/downcsv?it=' + $('select[name="search-select"]').val()+'&na='+$('input[name="search-what"]').val());
+}
+function blukDelete(){
+    if(!$('.checked-candidate:checked').length){
+        alert('Please check the candidates you want to delete');
+        return;
+    }
+    
+    if(!confirm('Are you realy delete checked candiates?'))return false;
+    
+    var ids = [];
+    $('.checked-candidate:checked').each(function(i, el){
+        ids.push(el.value);
+    });
+    $.post('/admin/candidate/delete', {_token:$('input[name=_token]').val(),id:ids}, function(r){
+        location.reload();
+    })
+}
 </script>
 @endsection

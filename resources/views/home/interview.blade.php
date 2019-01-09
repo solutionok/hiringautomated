@@ -31,25 +31,29 @@
                 <div class="row">
                     @foreach  ($interviewList as $v)
                     <div class="font-icon-list col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                        <div class="font-icon-detail text-center">
-                            @if($v->preview_image)
-                            <img src="/{{$v->preview_image}}">
-                            @else
-                            <i class="now-ui-icons business_badge" style="font-size: 194px;"></i>
-                            @endif
-                            <h4>{{$v->name}}</h4>
-                            <p class="text-lefta">{{$v->description}}</p>
-                            <h6>Close on : {{$v->ctt}}</h6>
-                            <h6>Total Score : {{$v->grade}}</h6>
-                            <h6>My  Score : {{intval($v->mygrade)}}</h6>
-                            <div>
-                                @if($v->hisid)
-                                <a class="btn btn-sm btn-warning" href="/home/review/{{$v->hisid}}">View Review</a>
-                                @elseif(deadlineCheck($v->ctt))
-                                <button class="btn btn-sm btn-warning" onclick="startInterview({{$v->id}})">Start Interview</button>
-                                @else
-                                <a class="btn btn-sm btn-dark" href="javascript:;">Deadline Over</a>
-                                @endif
+                        <div class="interview-list ">
+                            <div class="interview-head">
+                                <h3 class="text-center interview-{{$v->id}}">{{$v->name}}</h3>
+                                <div class="interview-thumbnail">
+                                    <div class="interview-thumbnail-inner">
+                                        <img src="/{{$v->preview_image?$v->preview_image:'app/interview_image/no-image.png'}}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inerview-body text-center">
+                                <p class="text-lefta" style="min-height:50px;">{{$v->description}}</p>
+                                <h6>Close on : {{date('d.m.Y',strtotime($v->ctt))}}</h6>
+                                <h6>Total Score : {{$v->grade}}</h6>
+                                <h6>My  Score : {{intval($v->mygrade)}}</h6>
+                                <div>
+                                    @if($v->hisid)
+                                    <a class="btn btn-sm btn-warning" href="/home/review/{{$v->hisid}}">View Review</a>
+                                    @elseif(deadlineCheck($v->ctt))
+                                    <button class="btn btn-sm btn-warning" onclick="startInterview({{$v->id}})">Start Interview</button>
+                                    @else
+                                    <a class="btn btn-sm btn-dark" href="javascript:;">Deadline Over</a>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -54,12 +54,12 @@
         <div class="panel">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <h4 class="panel-title">
                             {{empty($interview)?'Interview damaged':$interview->name}}
                         </h4>
                     </div>
-                    <div class="col-sm-6 text-right">
+                    <div class="col-sm-12 text-right">
                         Total Score :  <span title="evaluated interview score/available score">{{$history->grade}} / {{$history->availgrade}}</span>
                         <progress value="{{$history->grade}}" max="{{$history->availgrade}}"></progress>
 
@@ -79,7 +79,7 @@
                             <div class="panel-body">
                                 <img src="/{{!empty($candidate->photo)?$candidate->photo:'app/candidate/user.jpg'}}">
                                 <p>Name : {{$candidate->name}}</p>
-                                <p>Interview Time : {{$history->rundate}}</p>
+                                <p>Interview Time : {{date('d.m.Y', strtotime($history->rundate))}}</p>
                                 <!--<p><a href="/admin/candidate/{{$candidate->id}}" class="btn btn-sm btn-warning" style="margin:0">View more</a></p>-->
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                                 <!--Quiz--> 
                                 <div class="quiz">
                                     <h5>Quiz</h5>
-                                    <blockquote>{{$quiz->description}}</blockquote>
+                                    <p>{{$quiz->description}}</p>
                                     @if($quiz->attach_media)
                                     <?php $ext = pathinfo($quiz->attach_media)['extension'] ?>
                                     @if($ext=='mp3'||$ext=='mp4')
@@ -165,7 +165,7 @@
                                 @endif 
 
 
-                                <h5>Summary</h5>
+                                <h5>Feedback</h5>
                                 @if(count($reviews))
                                 @foreach($reviews as $re)
                                 <p class="blockquote blockquote-warning">
@@ -253,78 +253,78 @@
 <script type="text/javascript" src="/js/bootbox.min.js"></script>
 <script type="text/javascript">
 
-                        @if (auth() -> user() -> isadmin != 2)
-                        $('.set-interview-review,.set-grade-review').hide();
-                        $('input,textarea').prop('readonly', true);
-                        @endif
+    @if (auth() -> user() -> isadmin != 2)
+    $('.set-interview-review,.set-grade-review').hide();
+    $('input,textarea').prop('readonly', true);
+    @endif
 
-                                $('.total-review').click(function () {
-                            var review = '';
-                            $.ajax({
-                            url:'/admin/review/historyinfo',
-                                    async:false,
-                                    type:'post',
-                                    data:'history_id=' + $('.total-review').attr('_history') + '&_token=' + $('input[name=_token]').val(),
-                                    success:function(r){
-                                    $('textarea[name=interview-review]').val(r);
-                                            $('.total-review-modal').modal();
-                                    }
-                            })
-                        })
+            $('.total-review').click(function () {
+        var review = '';
+        $.ajax({
+        url:'/admin/review/historyinfo',
+                async:false,
+                type:'post',
+                data:'history_id=' + $('.total-review').attr('_history') + '&_token=' + $('input[name=_token]').val(),
+                success:function(r){
+                $('textarea[name=interview-review]').val(r);
+                        $('.total-review-modal').modal();
+                }
+        })
+    })
 
-                        $('.set-interview-review').click(function () {
-                            var param = {
-                                '_token': $('input[name=_token]').val(),
-                                'historyId': $('.total-review').attr('_history'),
-                                'review': $('textarea[name=interview-review]').val(),
-                            };
-                            $.post('/admin/review/evaluate', param, function (r) {
-                                location.reload();
-                            })
-                        })
+    $('.set-interview-review').click(function () {
+        var param = {
+            '_token': $('input[name=_token]').val(),
+            'historyId': $('.total-review').attr('_history'),
+            'review': $('textarea[name=interview-review]').val(),
+        };
+        $.post('/admin/review/evaluate', param, function (r) {
+            location.reload();
+        })
+    })
 
-                        $('.set-mark-trigger').click(function () {
-                            $.ajax({
-                                url: '/admin/review/historyinfo',
-                                async: false,
-                                dataType: 'json',
-                                type: 'post',
-                                data: 'history_id=' + $(this).attr('_history') + '&quiz_id=' + $(this).attr('_id') + '&_token=' + $('input[name=_token]').val(),
-                                success: function (r) {
-                                    if (r['qtype'] * 1 > 2) {
-                                        $('input[name=quiz-grade]').attr('max', r['grade']).val(r['mark'] ? r['mark'] : '0').prop('readonly', false);
-                                    } else {
-                                        $('input[name=quiz-grade]').attr('max', r['grade']).val(r['mark'] ? r['mark'] : '0').prop('readonly', true);
-                                    }
+    $('.set-mark-trigger').click(function () {
+        $.ajax({
+            url: '/admin/review/historyinfo',
+            async: false,
+            dataType: 'json',
+            type: 'post',
+            data: 'history_id=' + $(this).attr('_history') + '&quiz_id=' + $(this).attr('_id') + '&_token=' + $('input[name=_token]').val(),
+            success: function (r) {
+                if (r['qtype'] * 1 > 2) {
+                    $('input[name=quiz-grade]').attr('max', r['grade']).val(r['mark'] ? r['mark'] : r['grade']).prop('readonly', false);
+                } else {
+                    $('input[name=quiz-grade]').attr('max', r['grade']).val(r['mark'] ? r['mark'] : '0').prop('readonly', true);
+                }
 
-                                    $('textarea[name=quiz-review]').val(r['comment'] ? r['comment'] : '');
-                                    $('.review-modal').modal();
-                                }
-                            })
+                $('textarea[name=quiz-review]').val(r['comment'] ? r['comment'] : '');
+                $('.review-modal').modal();
+            }
+        })
 
-                            return;
-                        });
+        return;
+    });
 
-                        $('.set-grade-review').click(function () {
-                            if ($('input[name=quiz-grade]').val() * 1 > $('input[name=quiz-grade]').attr('max') * 1) {
-                                alert('This Question grade is maximium ' + $('input[name=quiz-grade]').attr('max'));
-                                setTimeout(function () {
-                                    $('input[name=quiz-grade]').val($('input[name=quiz-grade]').attr('max')).focus();
-                                }, 300);
-                                return false;
-                            }
+    $('.set-grade-review').click(function () {
+        if ($('input[name=quiz-grade]').val() * 1 > $('input[name=quiz-grade]').attr('max') * 1) {
+            alert('This Question grade is maximium ' + $('input[name=quiz-grade]').attr('max'));
+            setTimeout(function () {
+                $('input[name=quiz-grade]').val($('input[name=quiz-grade]').attr('max')).focus();
+            }, 300);
+            return false;
+        }
 
-                            var param = {
-                                '_token': $('input[name=_token]').val(),
-                                'historyId': $('.set-mark-trigger').attr('_history'),
-                                'quiz_id': $('.set-mark-trigger').attr('_id'),
-                                'grade': $('input[name=quiz-grade]').val(),
-                                'review': $('textarea[name=quiz-review]').val(),
-                            };
-                            $.post('/admin/review/evaluate', param, function (r) {
-                                location.reload();
-                            })
-                        })
+        var param = {
+            '_token': $('input[name=_token]').val(),
+            'historyId': $('.set-mark-trigger').attr('_history'),
+            'quiz_id': $('.set-mark-trigger').attr('_id'),
+            'grade': $('input[name=quiz-grade]').val(),
+            'review': $('textarea[name=quiz-review]').val(),
+        };
+        $.post('/admin/review/evaluate', param, function (r) {
+            location.reload();
+        })
+    })
 
 </script>
 @endsection

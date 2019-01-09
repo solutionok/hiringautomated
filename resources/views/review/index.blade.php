@@ -1,6 +1,7 @@
 @extends('layouts.page')
 @section('css')
 <link rel="stylesheet" href="/assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
+<link href="/assets/vendor/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" >
 <style>
     .panel img{
         max-height: 110px;
@@ -20,6 +21,32 @@
     #date-search-form input{background: #fff;width: 150px;text-align:center;}
     .input-daterange{border-left: solid 1px #ddd;border-top-left-radius: 8px;border-bottom-left-radius: 8px;}
     .ui-slider.ui-widget-content{background: #fff!important;}
+    progress {
+        background-color: #fff;
+        border: 0;
+        height: 18px;
+        border-radius: 9px;
+        -webkit-appearance: none;
+   appearance: none;
+    }
+    progress[value]::-webkit-progress-bar {
+        background-color: #fff;
+        border: 0;
+        height: 18px;
+        border-radius: 9px;
+        background-color: #eee;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    progress[value]::-webkit-progress-value {
+background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+/*background: #fd1111;*/
+
+border-radius: 2px; 
+}
+
+
 </style>
 @endsection
 @section('content')
@@ -35,9 +62,9 @@
                         <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                         </span>
-                        <input type="text" class="form-control" name="startd" readonly="" value="{{$searchDateRange[0]}}">
+                        <input type="text" class="form-control" name="startd" readonly="" value="{{LT2IT($searchDateRange[0])}}">
                         <span class="input-group-addon">to</span>
-                        <input type="text" class="form-control" name="endd" readonly="" value="{{$searchDateRange[1]}}">
+                        <input type="text" class="form-control" name="endd" readonly="" value="{{LT2IT($searchDateRange[1])}}">
                     </div>
                 </div>
                 @else
@@ -89,7 +116,7 @@
                 
                 <div class="row">
                     <div class="col-sm-5 text-right"><p>Date</p></div>
-                    <div class="col-sm-7"><p>{{$q->rundate}}</p></div>
+                    <div class="col-sm-7"><p>{{date('d.m.Y', strtotime($q->rundate))}}</p></div>
                 </div>
                 
                 <div class="row">
@@ -98,7 +125,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-5 text-right"><p>Close on</p></div>
-                    <div class="col-sm-7"><p>{{$q->att}}</p></div>
+                    <div class="col-sm-7"><p>{{date('d.m.Y', strtotime($q->att))}}</p></div>
                 </div>
                 <hr>
                 <div class="row">
@@ -123,7 +150,8 @@
 @section('scripts')
 <script src="/assets/vendor/jquery-ui/js/jquery-ui-1.10.4.custom.js"></script>
 <script type="text/javascript">
-    $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+    $.fn.datepicker.defaults.format = "dd.mm.yyyy";
+//    $.fn.datepicker.defaults.format = "yyyy-mm-dd";
     $('input[name=startd],input[name=endd]').change(function(){
         $('#date-search-form').submit();
     })

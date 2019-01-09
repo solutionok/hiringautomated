@@ -14,7 +14,11 @@ function checkInterviewDeadline($interview, $isCandidate = true){
         }
     }
 }
-
+function interviewNames($ids){
+    if(!$ids)$ids = '-1';
+    $ids = explode(',', $ids);
+    return implode(', ', DB::table('interview')->whereIn('id', $ids)->pluck('name')->toArray());
+}
 function getInterviewPageSearchDate($request){
     $ds = [date('Y-m-d', strtotime('-2 months')), date('Y-m-d', strtotime('+1 months'))];
     $settingName = 'admin_interview_page_search_date';
@@ -24,7 +28,7 @@ function getInterviewPageSearchDate($request){
             $ds = explode(',', $dds);
         }
     }else{
-        $ds = [$request->input('startd',''), $request->input('endd','')];
+        $ds = [IT2LT($request->input('startd','')), IT2LT($request->input('endd',''))];
         $row = ['setting_name'=>$settingName, 'setting_value'=>implode(',', $ds)];
         
         if(DB::table('settings')->where('setting_name', $settingName)->count()){
@@ -34,6 +38,17 @@ function getInterviewPageSearchDate($request){
         }
     }
     return $ds;
+}
+
+function IT2LT($IT){
+    $s = preg_split("/[\.\/\-\,]/",$IT);
+    if(count($s)!=3||$s[2]<1001)return $IT;
+    return sprintf('%04d-%02d-%02d', $s[2], $s[1], $s[0]);
+}
+function LT2IT($LT){
+    $s = preg_split("/[\.\/\-\,]/",$LT);
+    if(count($s)!=3||$s[0]<1001)return $LT;
+    return sprintf('%02d.%02d.%04d', $s[2], $s[1], $s[0]);
 }
 
 function getReviewPageSearchDate($request){
@@ -45,7 +60,7 @@ function getReviewPageSearchDate($request){
             $ds = explode(',', $dds);
         }
     }else{
-        $ds = [$request->input('startd',''), $request->input('endd','')];
+        $ds = [IT2LT($request->input('startd','')), IT2LT($request->input('endd',''))];
         $row = ['setting_name'=>$settingName, 'setting_value'=>implode(',', $ds)];
         
         if(DB::table('settings')->where('setting_name', $settingName)->count()){
@@ -56,7 +71,6 @@ function getReviewPageSearchDate($request){
     }
     return $ds;
 }
-
 function getAssesorNames($ids, $ass, $getAll = false){
     if(empty($ids)||empty($ass)){
         return '';
@@ -75,7 +89,7 @@ function getAssesorNames($ids, $ass, $getAll = false){
 }
 
 function deadlineCheck($deadline){
-    return strtotime($deadline.' 23:59:59')>=strtotime('now');
+    return strtotime(IT2LT($deadline).' 23:59:59')>=strtotime('now');
 }
 
 function _df_($e){

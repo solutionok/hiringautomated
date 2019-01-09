@@ -13,6 +13,7 @@ use App\Models\InterviewAssessor;
 use App\Models\InterviewHistory;
 use App\Models\Interview;
 use App\User;
+use Response;
 
 
 class CandidateController extends Controller
@@ -83,7 +84,7 @@ class CandidateController extends Controller
             'pageName'=>'candidate', 
             'searchFormAction'=>'/admin/candidate', 
             'searchWhat'=>$request->input('search-what'), 
-            'searchPlaceholder'=>'Search by candidate name, email, phone', 
+            'searchPlaceholder'=>'Search by name, email, phone', 
             'searchSelect'=>$searchSelect, 
             'list'=>$re, 
             'interviews'=>$interviews, 
@@ -117,14 +118,20 @@ class CandidateController extends Controller
     }
     
     public function remove(Request $request){
-        $id = $request->input('id');
-        $user = DB::table('users')->where('id', $id)->first();
-        
-        if(isset($user->photo)){
-            @unlink(public_path().'/'.$user->photo);
+        $ids = $request->input('id');
+        if(!is_array($ids)){
+            $ids = (array)$ids;
         }
-        
-        DB::table('users')->where('id', $id)->delete();
+        foreach($ids as $id){
+            if(!$id)continue;
+            $user = DB::table('users')->where('id', $id)->first();
+
+            if(isset($user->photo)){
+                @unlink(public_path().'/'.$user->photo);
+            }
+
+            DB::table('users')->where('id', $id)->delete();
+        }
         die('ok');
     }
     
@@ -168,7 +175,7 @@ class CandidateController extends Controller
         ];
         
         if($data['new_password']||!$request->input('candidate_id')){
-            $setPassword = $data['new_password']?$data['new_password']:base64_encode($user['email']);
+            $setPassword = $data['new_password']?$data['new_password']:($user['phone']);
             $user['password'] = Hash::make($setPassword);
             
             /////////////////////
@@ -263,7 +270,7 @@ class CandidateController extends Controller
                     continue;
                 }
                 
-                $password = base64_encode($f[2]);
+                $password = ($f[3]);
                 
                 $userId = DB::table('users')->insertGetId([
                     'name' => $f[1],
@@ -349,4 +356,30 @@ class CandidateController extends Controller
         echo json_encode($assessors);
     }
     
+    public function downcsv(Request $request){
+        $select = DB::table('users as a')
+                ->leftJoin('interview_candidate as b', 'b.candidate_id','=','a.id')
+                ->where('isadmin',0)
+                ->groupBy('a.id')
+                ;
+        if($request->input('it'))$select->where('b.interview_id', $request->input('it'));
+        if($request->input('na'))$select->whereRaw('(a.name like "%'.$request->input('na').'%" OR a.email like "%'.$request->input('na').'%" OR a.phone like "%'.$request->input('na').'%")');
+        
+        $filename = "Candidates.csv";
+        @unlink($filename);
+        $handle = fopen($filename, 'w+');
+        fputcsv($handle, array('S.No', 'Name', 'E-mail', 'Phone'));
+
+        foreach($select->get() as $i=>$row) {
+            fputcsv($handle, array($i+1, $row->name, $row->email, $row->phone));
+        }
+
+        fclose($handle);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+        );
+
+        return Response::download(public_path().'/'. $filename, $filename, $headers);
+    }
 }

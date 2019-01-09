@@ -245,6 +245,7 @@ class ReviewController extends Controller
                 ;
         
         $filename = $interview->name . "_Score_From_".$minScore."_TO_".$maxScore.".csv";
+        @unlink($filename);
         $handle = fopen($filename, 'w+');
         fputcsv($handle, array('#', 'Name', 'E-mail', 'Phone', 'Date', 'Score'));
 
@@ -259,6 +260,5 @@ class ReviewController extends Controller
         );
 
         return Response::download(public_path().'/'. $filename, $filename, $headers);
-        
     }
 }

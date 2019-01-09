@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/resources/views/home/index.blade.php</file>
-            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/resources/views/emailtmp.blade.php</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/app/Http/Controllers/Admin/CandidateController.php</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/resources/views/candidate/index.blade.php</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/resources/views/dashboard/index.blade.php</file>
         </group>
     </open-files>
 </project-private>

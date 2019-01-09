@@ -26,42 +26,31 @@ class DashboardController extends Controller
         $interviewHistoryIds = InterviewHistory::whereIn('interview_id', $interviewIds)->pluck('id')->toArray();
         $interviewHistoryIds[]=-1;
         $reviewCount = Review::whereIn('interview_history_id', $interviewHistoryIds)->groupBy('interview_history_id','assessor_id')->count();
+        $maxReview = InterviewHistory::count();
         $assessorCount = User::where('isadmin', 2)->count();
         $candidateCount = User::where('isadmin', 0)->count();
         
         
-        if(auth()->user()->isadmin==1){
-            $intTemplates = DB::table('interview')->where('active_status','0')->get();
-            
-            $hasReviewInterviewIds = DB::table('review')->pluck('interview_history_id')->toArray();
-            $hasReviewInterviewIds = array_unique($hasReviewInterviewIds);
-            array_push($hasReviewInterviewIds, -1);
-            
-            $interviews = DB::table('interview_history')
-                    ->select('interview_history.*', 'interview.name as interviewn', 'users.name as candidaten', 'users.photo')
-                    ->join('interview', 'interview.id', '=', 'interview_history.interview_id')
-                    ->join('users', 'users.id', '=', 'interview_history.candidate_id')
-                    ->whereNotIn('interview_history.id', $hasReviewInterviewIds)
-                    ->orderBy('interview_history.rundate', 'desc')
-                    ->get();
-        }else{
-            $intTemplates = [];
-            
-            $hasReviewInterviewIds = DB::table('review')->pluck('interview_history_id')->toArray();
-            $hasReviewInterviewIds = array_unique($hasReviewInterviewIds);
-            array_push($hasReviewInterviewIds, -1);
-            
-            $interviews = DB::table('interview_history')
-                    ->select('interview_history.*', 'interview.name as interviewn', 'users.name as candidaten', 'users.photo')
-                    ->join('interview', 'interview.id', '=', 'interview_history.interview_id')
-                    ->join('users', 'users.id', '=', 'interview_history.candidate_id')
-                    ->join('interview_assessor', 'interview_assessor.interview_id', '=', 'interview.id')
-                    ->where('interview_assessor.assessor_id',auth()->user()->id)
-                    ->whereNotIn('interview_history.id', $hasReviewInterviewIds)
-                    ->groupBy('interview_history.id')
-                    ->orderBy('interview_history.rundate', 'desc')
-                    ->get();
-        }
+        $intTemplates = DB::table('interview_candidate as a')
+                ->leftJoin('interview_history as b', 'b.candidate_id', '=', 'a.candidate_id')
+                ->join('interview as c', 'c.id', '=', 'a.interview_id')
+                ->join('users as d', 'd.id', '=', 'a.candidate_id')
+                ->whereRaw('b.id is null')
+                ->select('a.*', 'd.photo', 'c.name as interviewn', 'd.name as candidaten')
+                ->orderBy('c.ctt', 'desc')
+                ->get();
+
+        $hasReviewInterviewIds = DB::table('review')->pluck('interview_history_id')->toArray();
+        $hasReviewInterviewIds = array_unique($hasReviewInterviewIds);
+        array_push($hasReviewInterviewIds, -1);
+
+        $interviews = DB::table('interview_history')
+                ->select('interview_history.*', 'interview.name as interviewn', 'users.name as candidaten', 'users.photo')
+                ->join('interview', 'interview.id', '=', 'interview_history.interview_id')
+                ->join('users', 'users.id', '=', 'interview_history.candidate_id')
+                ->whereNotIn('interview_history.id', $hasReviewInterviewIds)
+                ->orderBy('interview_history.rundate', 'desc')
+                ->get();
         
         return view('dashboard.index',[
             'pageName'=>'dashboard', 

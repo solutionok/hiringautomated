@@ -118,7 +118,7 @@
                 <div class="table-responsive">
                     <table class="table mb-none">
                         <thead class="">
-                        <th>#</th>
+                        <th>S.No</th>
                         <th>Candidate</th>
                         <th>Interview</th>
                         <th>Date</th>
@@ -129,7 +129,7 @@
                                 <td>{{$i+1}}</td>
                                 <td>
                                     <a href="/admin/review/{{$q->id}}">
-                                        <img src="/{{!empty($q->photo)?$q->photo:'app/candidate/user.jpg'}}" style="width:30px;height:30px;">{{$q->candidaten}}
+                                        <img src="/{{!empty($q->photo)?$q->photo:'app/candidate/user.jpg'}}" style="width:30px;height:30px;"><nobr>{{$q->candidaten}}</nobr>
                                     </a>
                                 </td>
                                 <td>{{$q->interviewn}}</td>
@@ -147,33 +147,31 @@
         <section class="panel">
             <header class="panel-heading">
                 <h2 class="panel-title">
-                    Incompleted interview templates
+                    Not appeared candidates
                 </h2>
             </header>
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table mb-none">
                         <thead class="">
-                        <th>#</th>
+                        <th>S.No</th>
+                        <th>Candidate</th>
                         <th>Interview</th>
-                        <th>Date</th>
                         </thead>
                         <tbody>
                             @foreach($intTemplates as $i=>$q)
                             <tr>
                                 <td>{{$i+1}}</td>
                                 <td>
-                                    <a href="/admin/interview">
-                                        @if($q->preview_image)
-                                        <img src="/{{$q->preview_image}}">
-                                        @else
-                                        <i class="now-ui-icons business_badge"></i>
-                                        @endif
-
-                                        {{$q->name}}
+                                    <a href="/admin/candidate/view?id={{$q->candidate_id}}">
+                                        <img src="/{{!empty($q->photo)?$q->photo:'app/candidate/user.jpg'}}" style="width:30px;height:30px;"><nobr>{{$q->candidaten}}</nobr>
                                     </a>
                                 </td>
-                                <td>{{$q->change_date}}</td>
+                                <td>
+                                    <a href="/admin/quiz?it={{$q->interview_id}}">
+                                        {{$q->interviewn}}
+                                    </a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

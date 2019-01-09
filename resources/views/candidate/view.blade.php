@@ -121,8 +121,8 @@
                                                 {{$h->name}}
                                             </a>
                                         </td>
-                                        <td>{{$h->ctt}}</td>
-                                        <td>{{$h->rundate?$h->rundate:'-'}}</td>
+                                        <td>{{date('d.m.Y', strtotime($h->ctt))}}</td>
+                                        <td>{{$h->rundate?date('d.m.Y', strtotime($h->rundate)):'-'}}</td>
                                         <td>{{$h->grade?($h->availgrade.' / '.$h->grade):'-'}}</td>
                                         <td>
                                             @if(deadlineCheck($h->ctt)&&empty($h->hid))

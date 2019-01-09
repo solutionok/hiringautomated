@@ -58,8 +58,8 @@ class InterviewController extends Controller
                     ->update([
                         'name' => $request->input('name'),
                         'description' => $request->input('description'),
-                        'ctt' => ($request->input('ctt')),
-                        'att' => ($request->input('att')),
+                        'ctt' => IT2LT($request->input('ctt')),
+                        'att' => IT2LT($request->input('att')),
                         'change_date' => now(),
                         'change_user' => 'admin',
                     ]);
@@ -68,8 +68,8 @@ class InterviewController extends Controller
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
                 'change_date' => now(),
-                'ctt' => ($request->input('ctt')),
-                'att' => ($request->input('att')),
+                'ctt' => IT2LT($request->input('ctt')),
+                'att' => IT2LT($request->input('att')),
                 'change_user' => 'admin',
                 'active_status' => 1,
             ]);

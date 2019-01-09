@@ -92,6 +92,7 @@ async function startRecord() {
 }
 
 function goNext() {
+    showOveray("Video Saving in Process");
     stopAll();
     
     const blob = new Blob(recordedBlobs, {type: 'video/webm'});
@@ -99,13 +100,14 @@ function goNext() {
     var formData = new FormData();
     formData.append('recordFile', blob);
     formData.append('_token', $('input[name="_token"').val());
-
+    
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status == 200) {
-            bootbox.alert(request.responseText, function () {
-                location.reload();
-            });
+            hideOveray('Video saved');
+            setTimeout(function () {
+              location.reload();
+            }, 2000);
         }
     };
     request.open('POST', '/home/runsave');

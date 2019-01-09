@@ -18,7 +18,7 @@ class LoginController extends Controller {
       |
      */
 
-use AuthenticatesUsers;
+    use AuthenticatesUsers;
 
     /**
      * Create a new controller instance.
@@ -35,9 +35,7 @@ use AuthenticatesUsers;
             'password' => 'required',
         ]);
 
-
         $remember_me = $request->has('remember_me') ? true : false;
-
 
         if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember_me)) {
             $user = auth()->user();
@@ -51,10 +49,10 @@ use AuthenticatesUsers;
         if (Auth::user()->isadmin == 1) {
             return '/admin';
         } else if (Auth::user()->isadmin == 2) {
-            return '/admin/settings';
+            return '/admin/review';
         } else {
-            return '/home/mypage';
+            return '/home/interview';
         }
     }
-
+    
 }

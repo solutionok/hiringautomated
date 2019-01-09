@@ -35,14 +35,14 @@
             <div class="panel-heading text-right" style="padding-right:20px;">
                 <div class="row">
                     <div class="col-sm-7">
-                        <h4 class="">
+                        <h4 class="text-left">
                             {{$interview->name}}
                         </h4>
                     </div>
                     <div class="col-sm-5">
                         <p class="timer rasp-time">
                             <i class="fa fas fa-clock"></i> 
-                            Rasp Time <input type="text" value="{{date('i : s', $quiz->qtime)}}" readonly="">
+                            Response Time <input type="text" value="{{date('i : s', $quiz->qtime)}}" readonly="">
                         </p>
                         @if($quiz->qtype=='3' || $quiz->qtype=='4')
                         <p class="timer prepare-time">
@@ -144,6 +144,7 @@
 @endsection
 
 @section('scripts')
+<script src="/plugins/jqueryoverlay/loadingoverlay.min.js"></script>
 <script>
     var timeLimit = {{$quiz -> qtime}};
     var preparationTime = {{$quiz -> qprepare}};
@@ -154,44 +155,50 @@
 
     return '00 : ' + (s % 60 > 9?s % 60:('0' + s % 60));
     }
+    
+    function showOveray(msg){
+        $.LoadingOverlay("show", {
+            image       : "",
+            text        : msg
+        });
+    }
+    
+    function hideOveray(msg){
+        $.LoadingOverlay("text", msg);
+    }
 </script>
 @if($quiz->qtype=='3' || $quiz->qtype=='4')
 <script src="/assets/javascripts/adapter.latest.js"></script>
 <script src="/assets/javascripts/interviewmain.js"></script>
 @else
 <script>
-    var timeLimitInterval = setInterval(function(){
-    if (timeLimit <= 0){
+  var timeLimitInterval = setInterval(function () {
+  if (timeLimit <= 0) {
     clearInterval(timeLimitInterval);
     goNext(true);
     return;
-    }
-    timeLimit--;
-    $('.rasp-time input').val(tf(timeLimit));
-    }, 1000);
-    function goNext(automated){
-    var checked = [];
-    $('.problem-list li input').each(function(i, el){
-    checked.push($(el).prop('checked')?1:0)
-    });
-    $.post('/home/runsave', {checked:checked, _token:$('input[name="_token"').val()}, function(r){
-    if (automated){
-    bootbox.alert(r)
-            setTimeout(function(){
-            location.reload();
-            }, 2000);
-    } else{
-    bootbox.alert(r, function(){
-    location.reload();
-    });
-    }
-    })
-    }
+  }
+  timeLimit--;
+  $('.rasp-time input').val(tf(timeLimit));
+}, 1000);
+function goNext(automated) {
+  showOveray("Saving in Progress");
+  var checked = [];
+  $('.problem-list li input').each(function (i, el) {
+    checked.push($(el).prop('checked') ? 1 : 0)
+  });
+  $.post('/home/runsave', { checked: checked, _token: $('input[name="_token"').val() }, function (r) {
+      hideOveray(r);
+      setTimeout(function () {
+        location.reload();
+      }, 2000);
+  })
+}
 
-    $('#go-next').click(function(){
-    $(this).hide();
-    goNext();
-    })
+$('#go-next').click(function () {
+  $(this).hide();
+  goNext();
+})
 </script>
 @endif
 @endsection

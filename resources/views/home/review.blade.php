@@ -46,12 +46,12 @@
         <div class="panel">
             <div class="panel-heading">
                 <div class="row">
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
                         <h4 class="panel-title">
                             {{empty($interview)?'Interview damaged':$interview->name}}
                         </h4>
                     </div>
-                    <div class="col-sm-4 text-right">
+                    <div class="col-sm-12 text-right">
                         Total Score :  <span title="evaluated interview score/maximium score">{{$history->grade}} / {{$history->availgrade}}</span>
                         <progress value="{{$history->grade}}" max="{{$history->availgrade}}"></progress>
 
@@ -68,7 +68,7 @@
                         <div class="panel-body">
                             <img src="/{{!empty($candidate->photo)?$candidate->photo:'app/candidate/user.jpg'}}">
                             <p>Name : {{$candidate->name}}</p>
-                            <p>Interview Time : {{$history->rundate}}</p>
+                            <p>Interview Time : {{date('d.m.Y',strtotime($history->rundate))}}</p>
                             <p>Evaluated : {{empty($history->evaluated)?'Not yet':'Yes'}}</p>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                                 <!--Quiz-->
                                 <div class="quiz">
                                     <h5>Question</h5>
-                                    <blockquote>{{$quiz->description}}</blockquote>
+                                    <p>{{$quiz->description}}</p>
                                     @if($quiz->attach_media)
                                     <?php $ext = pathinfo($quiz->attach_media)['extension'] ?>
                                     @if($ext=='mp3'||$ext=='mp4')
@@ -154,7 +154,7 @@
                             @endif 
                             
                             
-                            <h5>Summary</h5>
+                            <h5>Feedback</h5>
                             @if(count($reviews))
                                 @foreach($reviews as $re)
                                     <p class="blockquote blockquote-warning">

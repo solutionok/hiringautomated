@@ -15,7 +15,7 @@
                 <ul class="nav nav-main">
                     <!--if admin, assessor-->
                     @if(auth()->user()->isadmin!=0)
-                    <li class="{{($pageName=='dashboard') ? 'nav-active' : '' }}">
+                    <li class="{{($pageName=='dashboard') ? 'nav-active' : '' }}" {{auth()->user()->isadmin!=1?'style=display:none;':''}}>
                         <a href="/admin/dashboard">
                             <i class="fa fa-home" aria-hidden="true"></i>
                             <span>Dashboard</span>
@@ -53,7 +53,7 @@
                     <li class="{{($pageName=='settings') ? 'nav-active' : '' }}">
                         <a href="/admin/settings">
                             <img src="/assets/images/settings.png" aria-hidden="true">
-                            <span>Settings</span>
+                            <span>Profile</span>
                         </a>
                     </li>
                     

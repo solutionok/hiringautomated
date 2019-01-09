@@ -35,7 +35,7 @@
     }
     
     $(window).resize(function(){
-        if($('body').width()<1250){
+        if($('body').width()<1300){
             $('html').addClass('sidebar-left-collapsed');
         }else{
             $('html').removeClass('sidebar-left-collapsed');

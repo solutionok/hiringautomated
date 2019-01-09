@@ -6,13 +6,8 @@
         <meta name="description" content="Automatedhiring system">
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
         <title>{{env('APP_NAME')}}</title>
-
         @include('layouts.css')
-        <style>
-            
-        </style>
     </head>
     <body class="login-body">
         <a href="/" class="login-logo">
@@ -30,6 +25,9 @@
                                 <h2 class="title text-uppercase text-weight-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
                             </div>
                             <div class="panel-body">
+                                @if($errors->any())
+                                <div class="alert alert-danger invalid-message">your username and password are wrong.</div>
+                                @endif
                                 <form method="post">
                                     @csrf
                                     <div class="form-group mb-lg">
@@ -53,12 +51,12 @@
                                             <input name="password" type="password" class="form-control input-lg" required="">
                                             <span class="input-group-addon">
                                                 <span class="icon icon-lg">
-                                                    <i class="fa fa-lock"></i>
+                                                    <i class="fa fa-eye"></i>
                                                 </span>
                                             </span>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="row">
                                         <div class="col-sm-8">
                                             <div class="checkbox-custom checkbox-default">
@@ -82,4 +80,11 @@
             </div>
         </div>
     </body>
+    
+    <script type="text/javascript" src="/assets/vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+        $('input[name=email],input[name=password]').focus(function(){
+            $('.invalid-message').slideUp();
+        })
+    </script>
 </html>

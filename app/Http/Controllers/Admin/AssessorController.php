@@ -23,18 +23,19 @@ class AssessorController extends Controller
         $assessorWhat = $request->input('search-what','');
 
         $re = DB::table('users as a')
-                ->select('a.*')
                 ->leftJoin('interview_assessor as b', 'a.id', '=', 'b.assessor_id')
                 ->where('a.isadmin', 2)
                 ->whereRaw($interviewId ? 'b.interview_id='.$interviewId : 'a.id>0')
                 ->whereRaw($assessorWhat
                         ? ('(a.name like "%'.$assessorWhat.'%" OR a.email like "%'.$assessorWhat.'%" OR a.phone like "%'.$assessorWhat.'%")')
                         : ('a.id>0'))
+                ->groupBy('a.id')
+                ->select('a.*',DB::raw('group_concat(b.interview_id) as interviewIds'))
                 ->orderBy('created_at','desc')
                 ->get();
         
         $searchSelect = '<select name="search-select" class="form-control" style="width:300px;" onchange="this.form.submit()">';
-        $searchSelect .= '<option value=""></option>';
+        $searchSelect .= '<option value="">Select Interview</option>';
         foreach(Interview::all() as $it){
             $searchSelect .= '<option value="'.$it->id.'" '.($interviewId==$it->id?'selected':'').'>'.$it->name.'</option>';
         }
@@ -44,7 +45,7 @@ class AssessorController extends Controller
             'pageName'=>'assessor', 
             'searchFormAction'=>'/admin/assessor', 
             'searchWhat'=>$request->input('search-what'), 
-            'searchPlaceholder'=>'Search by assessor name, email, phone', 
+            'searchPlaceholder'=>'Search by name, email, phone', 
             'searchSelect'=>$searchSelect, 
             'list'=>$re]);
     }
@@ -74,7 +75,7 @@ class AssessorController extends Controller
         }
         
         if($request->input('new_password', false) || !$request->input('assessor_id')){
-            $password = !$request->input('assessor_id') ? base64_encode($request->input('email')) : $request->input('new_password', false);
+            $password = !$request->input('assessor_id') ? ($request->input('phone')) : $request->input('new_password');
             
             /////////////////////
             $title = env('APP_NAME');

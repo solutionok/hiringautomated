@@ -6,6 +6,11 @@
 <style>
     #search-form input{background: #fff;width: 150px;text-align:center;}
     .input-daterange{border-left: solid 1px #ddd;border-top-left-radius: 8px;border-bottom-left-radius: 8px;}
+    .it-candidate,.it-assessor{text-transform: none!important;}
+    .it-description{padding: 5px 0;min-height: 70px;}
+    .interview-page .interview-list .interview-head h3{
+        height: 120px;
+    }
 </style>
 @endsection
 
@@ -21,9 +26,9 @@
                         <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                         </span>
-                        <input type="text" class="form-control" name="startd" readonly="" value="{{$searchDateRange[0]}}">
+                        <input type="text" class="form-control" name="startd" readonly="" value="{{LT2IT($searchDateRange[0])}}">
                         <span class="input-group-addon">to</span>
-                        <input type="text" class="form-control" name="endd" readonly="" value="{{$searchDateRange[1]}}">
+                        <input type="text" class="form-control" name="endd" readonly="" value="{{LT2IT($searchDateRange[1])}}">
                     </div>
                 </div>
             </div>
@@ -50,8 +55,8 @@
             </div>
         </div>
         <div class="inerview-body">
-            <h5 class='it-candidate'>Candidate : <a href='/admin/candidate?search-select={{$v->id}}' title="{{$v->candidateListTxt}}">{{$v->cc?($v->cc.' people'):'not yet'}}</a>, By <span> {{strtotime($v->ctt)?$v->ctt:''}}</span></h5>
-            <h5 class='it-assessor' ass='{{$v->ass}}'>Assessor : <a href='/admin/assessor?search-select={{$v->id}}' title="{{$v->assessorListTxt}}">{{$v->ac?($v->ac.' people'):'not yet'}}</a>, By <span>{{strtotime($v->att)?$v->att:''}}</span></h5>
+            <h5 class='it-candidate'>Candidate : <a href='/admin/candidate?search-select={{$v->id}}' title="{{$v->candidateListTxt}}">{{($v->cc.' candidate')}}</a>, Close on <span> {{strtotime($v->ctt)?date('d.m.Y', strtotime($v->ctt)):''}}</span></h5>
+            <h5 class='it-assessor' ass='{{$v->ass}}'>Assessor : <a href='/admin/assessor?search-select={{$v->id}}' title="{{$v->assessorListTxt}}">{{($v->ac.' assessor')}}</a>, Close on <span>{{strtotime($v->att)?date('d.m.Y', strtotime($v->att)):''}}</span></h5>
             <p class="it-description">{{$v->description}}</p>
             <div class="text-center">
                 <button class="btn btn-warning update-trigger" _iid="{{$v->id}}"  data-toggle="modal" data-target=".interview-modal" title="Edit name of the Interview, assessor, description">Edit</button>
@@ -101,7 +106,7 @@
                                     <button class="btn btn-info btn-xs" onclick="document.getElementById('preview_image').click();return false;">
                                         Choose
                                     </button>
-                                    Preview Image
+                                    Upload Image
                                     <input id="preview_image" name="preview_image" type="file" style="visibility:hidden;position: absolute;top: 0;" accept="image/*" title="Choose interview preview image">
                                 </label>
                                 <br>
@@ -153,7 +158,8 @@
 @section('scripts')
 <script src="/plugins/chosen_v1.8.7/chosen.jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+    $.fn.datepicker.defaults.format = "dd.mm.yyyy";
+//    $.fn.datepicker.defaults.format = "yyyy-mm-dd";
     $('select[name="assessor[]"]').chosen({width: "95%"})
 
     $('.update-trigger').click(function (e) {
@@ -225,6 +231,10 @@
     
     $('input[name=startd],input[name=endd]').change(function(){
         $('#search-form').submit();
+    })
+    
+    $('input[name="ctt"],input[name="att"]').on('changeDate', function(){
+         $(this).datepicker('hide');
     })
 </script>
 @endsection
