@@ -62,6 +62,7 @@
                 <div class="btn-bar">
                     Assign Candidates to 
                     <select name="interview_id" id="interview_id" data-placeholder="Select Interview" style="width: 300px;">
+                        <option value=""></option>
                         @foreach($interviews as $i=>$q)
                         <option value="{{$q->id}}">{{$q->name}}</option>
                         @endforeach
@@ -213,7 +214,7 @@ $('.checked-candidate-all').click(function(){
 
 $('#interview_id').change(function(){
     $('#assessor_id').empty();
-    $('#assessor_id').chosen('destroy');
+    $('#assessor_id').chosen('destroy').chosen();
     $('.assign-interview').prop('disabled', true);
     if(!this.value)return;
     $.post('/admin/candidate/assessors/' + this.value,{_token:$('input[name=_token]').val()}, function(r){
@@ -221,7 +222,7 @@ $('#interview_id').change(function(){
             $('#assessor_id').append('<option value="' + r[i]['id'] + '">' + r[i]['name'] + '</option>');
         }
         
-        $('#assessor_id').chosen();
+        $('#assessor_id').chosen('destroy').chosen();
         $('.assign-interview').prop('disabled', !($('#interview_id').val()&&$('#assessor_id').val()));
     },'json');
 }).change();
