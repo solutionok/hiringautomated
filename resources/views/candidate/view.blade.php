@@ -32,6 +32,7 @@
     <input type="file" name="cv-file" id="cv-file" accept=".pdf">
     <input type="hidden" name="candidate_id" value="{{@$user->id}}">
 </form>
+<iframe name="pass-save-frame" style="display:none;"></iframe>
 <div class="row">
     <div class="col-sm-0 col-md-2"></div>
     <div class="col-sm-12 col-md-8">
@@ -44,7 +45,7 @@
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="javascript:document.getElementById('cv-file').click();">Upload</a></li>
                         @if(@$user->cv)
-                        <li><a href="{{@$user->cv?$user->cv:'javascript:;'}}" target='_blank'>Show</a></li>
+                        <li><a href="{{@$user->cv?('/'.$user->cv):'javascript:;'}}" target='_blank'>Show</a></li>
                         @endif
                     </ul>
                 </div>

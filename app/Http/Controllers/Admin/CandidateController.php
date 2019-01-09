@@ -224,7 +224,7 @@ class CandidateController extends Controller
             }
         }
         
-        return redirect('admin/candidate/view?id='.$id);
+        return redirect('admin/candidate');
     }
     
     public function emailcheck(Request $request){
@@ -357,13 +357,14 @@ class CandidateController extends Controller
     }
     
     public function downcsv(Request $request){
+        $ids = explode(',', $request->input('ids','-1'));
+        
         $select = DB::table('users as a')
                 ->leftJoin('interview_candidate as b', 'b.candidate_id','=','a.id')
                 ->where('isadmin',0)
+                ->whereIn('a.id', $ids)
                 ->groupBy('a.id')
                 ;
-        if($request->input('it'))$select->where('b.interview_id', $request->input('it'));
-        if($request->input('na'))$select->whereRaw('(a.name like "%'.$request->input('na').'%" OR a.email like "%'.$request->input('na').'%" OR a.phone like "%'.$request->input('na').'%")');
         
         $filename = "Candidates.csv";
         @unlink($filename);

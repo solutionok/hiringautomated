@@ -74,8 +74,8 @@ class AssessorController extends Controller
             ]);
         }
         
-        if($request->input('new_password', false) || !$request->input('assessor_id')){
-            $password = !$request->input('assessor_id') ? ($request->input('phone')) : $request->input('new_password');
+        if($request->input('new_password') || !$request->input('assessor_id')){
+            $password = $request->input('new_password') ? $request->input('new_password') : $request->input('phone');
             
             /////////////////////
             $title = env('APP_NAME');

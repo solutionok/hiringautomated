@@ -226,7 +226,16 @@ $('#interview_id').change(function(){
     },'json');
 }).change();
 function downToCSV(){
-    $('#hidden-frame').attr('src', '/admin/candidate/downcsv?it=' + $('select[name="search-select"]').val()+'&na='+$('input[name="search-what"]').val());
+    if(!$('.checked-candidate:checked').length){
+        alert('Please check the candidates you want to donwload');
+        return;
+    }
+    
+    var ids = [];
+    $('.checked-candidate:checked').each(function(i, el){
+        ids.push(el.value);
+    });
+    $('#hidden-frame').attr('src', '/admin/candidate/downcsv?ids=' + ids);
 }
 function blukDelete(){
     if(!$('.checked-candidate:checked').length){

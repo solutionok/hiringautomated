@@ -49,10 +49,8 @@
                                         </div>
                                         <div class="input-group input-group-icon">
                                             <input name="password" type="password" class="form-control input-lg" required="">
-                                            <span class="input-group-addon">
-                                                <span class="icon icon-lg">
-                                                    <i class="fa fa-eye"></i>
-                                                </span>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default toggle-password" type="button"><i class="fa fa-eye"></i></button>
                                             </span>
                                         </div>
                                     </div>
@@ -85,6 +83,10 @@
     <script type="text/javascript">
         $('input[name=email],input[name=password]').focus(function(){
             $('.invalid-message').slideUp();
+        })
+        $('.toggle-password').click(function(){
+            $('input[name=password]').attr('type', $('input[name=password]').attr('type')=='password'?'text':'password');
+            $(this).html($('input[name=password]').attr('type')=='password'?'<i class="fa fa-eye"></i>':'<i class="fa fa-eye-slash"></i>');
         })
     </script>
 </html>
