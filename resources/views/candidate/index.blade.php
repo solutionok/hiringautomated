@@ -88,14 +88,15 @@
                         <th>Name</th>
                         <th>E-mail</th>
                         <th>Phone</th>
-                        <th>Interview (Assessor)</th>
+                        <th><span style="width:200px!important;display: inline-block">Interview</span><span style="display: inline-block">Assessor</span></th>
                         <th class="text-center">Action</th>
                         </thead>
                         <tbody>
                             @foreach($list as $i=>$q)
+                            <?php $csp = count($q->interviewList);?>
                             <tr>
                                 <td style="vertical-align: middle;"><input type="checkbox" class="checked-candidate"  value="{{$q->id}}"></td>
-                                <td>
+                                <td style="min-width: 120px;">
                                     <a href="/admin/candidate/view?id={{$q->id}}">
                                         <img src="/{{!empty($q->photo)?$q->photo:'app/candidate/user.jpg'}}">{{$q->name}}
                                     </a>
@@ -105,14 +106,21 @@
                                 <td>
                                     <ul style="list-style:none;padding:0;">
                                         @foreach($q->interviewList as $it)
-                                        <li style=" {{count($q->interviewList)==1?'':'border-bottom:dashed 1px #555555'}}">
+                                        <li style="{{count($q->interviewList)==1?'':'border-bottom:dashed 1px #555555;'}} height:30px;">
+                                            <nobr>
                                             <a href="{{empty($it->id)?'javascript:;':('/admin/review/'.$it->id)}}"
                                                 title="{{isset($it->rundate)?('Completed interview at '.date('d.m.Y', strtotime($it->rundate)).', evaluated score ' . $it->grade):'No interview'}}"
-                                                style="{{isset($it->rundate)?('color:green;'):'color:darkgray'}}"
+                                                style="{{isset($it->rundate)?('color:green;'):'color:darkgray'}};display: inline-block;width: 200px;padding-left: 5px;"
                                                 >
                                                 {{$it->name}}
-                                                ({{empty($it->as_ids)?('No assessor'):(getAssesorNames($it->as_ids,$assesors))}})
                                             </a>
+                                            <span
+                                                title="{{isset($it->rundate)?('Completed interview at '.date('d.m.Y', strtotime($it->rundate)).', evaluated score ' . $it->grade):'No interview'}}"
+                                                style="{{isset($it->rundate)?('color:green;'):'color:darkgray'}};display: inline-block;margin-left: 5px;"
+                                                >
+                                                {{empty($it->as_ids)?('No assessor'):(getAssesorNames($it->as_ids,$assesors))}}
+                                            </span>
+                                            </nobr>
                                         </li>
                                         @endforeach
                                     </ul>
@@ -152,7 +160,8 @@ $('#interview_id,#assessor_id').chosen()
 var Table = $('.table').dataTable({
     "columnDefs": [
         { "orderable": false, "targets": 0 },
-        { "orderable": false, "targets": 5 }
+        { "orderable": false, "targets": 4 },
+        { "orderable": false, "targets": 5 },
       ]
     ,  
     "dom": '<"top"lf>t<"bottom"pi><"clear">',

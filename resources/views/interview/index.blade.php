@@ -26,9 +26,9 @@
                         <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                         </span>
-                        <input type="text" class="form-control" name="startd" readonly="" value="{{LT2IT($searchDateRange[0])}}">
+                        <input type="text" class="form-control" name="startd" readonly="" value="{{LT2IT($searchDateRange[0])}}" style="cursor:initial">
                         <span class="input-group-addon">to</span>
-                        <input type="text" class="form-control" name="endd" readonly="" value="{{LT2IT($searchDateRange[1])}}">
+                        <input type="text" class="form-control" name="endd" readonly="" value="{{LT2IT($searchDateRange[1])}}" style="cursor:initial">
                     </div>
                 </div>
             </div>
@@ -59,10 +59,10 @@
             <h5 class='it-assessor' ass='{{$v->ass}}'>Assessor : <a href='/admin/assessor?search-select={{$v->id}}' title="{{$v->assessorListTxt}}">{{($v->ac.' assessor')}}</a>, Close on <span>{{strtotime($v->att)?date('d.m.Y', strtotime($v->att)):''}}</span></h5>
             <p class="it-description">{{$v->description}}</p>
             <div class="text-center">
-                <button class="btn btn-warning update-trigger" _iid="{{$v->id}}"  data-toggle="modal" data-target=".interview-modal" title="Edit name of the Interview, assessor, description">Edit</button>
-                <a class="btn btn-success" href="/admin/quiz?it={{$v->id}}" title="Edit Questions,time duration etc">Question</a>
-                <button class="btn btn-danger delete-trigger" _iid="{{$v->id}}" title="Delete interview also will remove associated quizes too">Delete</button>
-                <a class="btn btn-info" href="/admin/review?search-select={{$v->id}}" title="Explor interview result/reviews">Result</a>
+                <button class="btn btn-warning update-trigger btn-sm" _iid="{{$v->id}}"  data-toggle="modal" data-target=".interview-modal" title="Edit name of the Interview, assessor, description">Edit</button>
+                <a class="btn btn-success btn-sm" href="/admin/quiz?it={{$v->id}}" title="Edit Questions,time duration etc">Question</a>
+                <button class="btn btn-danger delete-trigger btn-sm" _iid="{{$v->id}}" title="Delete interview also will remove associated quizes too">Delete</button>
+                <a class="btn btn-info btn-sm" href="/admin/review?search-select={{$v->id}}" title="Explor interview result/reviews">Result</a>
                 <!--<a class="btn btn-danger" href="/admin/interview/toggle?it={{$v->id}}" title="{{intval($v->active_status)?'Currently actived':'Currently inactived'}}">{{intval($v->active_status)?'Inactive':'Active'}}</a>-->
             </div>
         </div>
@@ -104,9 +104,9 @@
                             <div class="form-group">
                                 <label class="control-label" style="position:relative;">
                                     <button class="btn btn-info btn-xs" onclick="document.getElementById('preview_image').click();return false;">
-                                        Choose
+                                        Upload Image
                                     </button>
-                                    Upload Image
+                                    
                                     <input id="preview_image" name="preview_image" type="file" style="visibility:hidden;position: absolute;top: 0;" accept="image/*" title="Choose interview preview image">
                                 </label>
                                 <br>
@@ -118,14 +118,14 @@
                                 <label class="control-label">Candidate Time Period</label>
                                 <div class="input-daterange input-group" data-plugin-datepicker>
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text" class="form-control" name="ctt" data-date-format="yyyy-mm-dd" autocomplete="off" readonly required>
+                                    <input type="text" class="form-control" name="ctt" data-date-format="yyyy-mm-dd" style="cursor: initial;" autocomplete="off" readonly required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label text-right">Assessor Time Period</label>
                                 <div class="input-daterange input-group" data-plugin-datepicker>
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text" class="form-control" name="att" data-date-format="yyyy-mm-dd" autocomplete="off" readonly required>
+                                    <input type="text" class="form-control" name="att" data-date-format="yyyy-mm-dd" style="cursor: initial;" autocomplete="off" readonly required>
                                 </div>
                             </div>
                         </div>

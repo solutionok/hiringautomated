@@ -143,7 +143,7 @@
                                     @if($quiz->attach_media)
                                     <?php $ext = pathinfo($quiz->attach_media)['extension'] ?>
                                     @if($ext=='mp3'||$ext=='mp4')
-                                    <video style="width:100%;" controls="" name="media" style="{{$ext=='mp3'?'width:100%;height:50px':'max-height:300px;'}}">
+                                    <video controls="" name="media" style="{{$ext=='mp3'?'width:100%;height:50px':'max-height:300px;'}}">
                                         <source src="/{{$quiz->attach_media}}" type="{{$ext=='mp3'?'audio/mp3':'video/mp4'}}">
                                     </video>
                                     @else

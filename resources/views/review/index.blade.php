@@ -62,9 +62,9 @@ border-radius: 2px;
                         <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                         </span>
-                        <input type="text" class="form-control" name="startd" readonly="" value="{{LT2IT($searchDateRange[0])}}">
+                        <input type="text" class="form-control" name="startd" readonly="" value="{{LT2IT($searchDateRange[0])}}" style="cursor:initial">
                         <span class="input-group-addon">to</span>
-                        <input type="text" class="form-control" name="endd" readonly="" value="{{LT2IT($searchDateRange[1])}}">
+                        <input type="text" class="form-control" name="endd" readonly="" value="{{LT2IT($searchDateRange[1])}}" style="cursor:initial">
                     </div>
                 </div>
                 @else

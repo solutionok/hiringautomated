@@ -125,17 +125,18 @@
                                         </label>
                                         <code>mp3, mp4, image only</code>
                                     </div>
-                                    <div class="col-md-2">
-                                        <label>Maximum Score</label>
-                                        <input name="grade" type="number" min="1" class="form-control" value="1" required="">
+                                    
+                                    <div class="col-md-4">
+                                        <label>Question Type</label>
+                                        <select class="form-control" name="qtype" placeholder="" required="">
+                                            @foreach($qtypes as $qtid=>$qtname)
+                                            <option value="{{$qtid}}">{{$qtname}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    <div class="col-md-3">
-                                        <label>Preparation Time(mm:ss)</label>
-                                        <input name="qprepare" type="text" class="form-control">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>Response Time(mm:ss)</label>
-                                        <input name="qtime" type="text" class="form-control" step="15" required="">
+                                    <div class="col-md-3 choice-count">
+                                        <label>Choice Count</label>
+                                        <input type="number" max="10" min="2" class="form-control" value="2">
                                     </div>
                                 </div>
                             </div>
@@ -146,17 +147,17 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-md-7">
-                                        <label>Question Type</label>
-                                        <select class="form-control" name="qtype" placeholder="" required="">
-                                            @foreach($qtypes as $qtid=>$qtname)
-                                            <option value="{{$qtid}}">{{$qtname}}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-md-4">
+                                        <label>Maximum Score</label>
+                                        <input name="grade" type="number" min="1" class="form-control" value="1" required="">
                                     </div>
-                                    <div class="col-md-5 choice-count">
-                                        <label>Choice Count</label>
-                                        <input type="number" max="10" min="2" class="form-control" value="2">
+                                    <div class="col-md-4">
+                                        <label>Preparation Time(mm:ss)</label>
+                                        <input name="qprepare" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Response Time(mm:ss)</label>
+                                        <input name="qtime" type="text" class="form-control" step="15" required="">
                                     </div>
                                 </div>
                             </div>

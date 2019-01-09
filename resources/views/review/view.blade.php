@@ -154,7 +154,7 @@
                                     @if($quiz->attach_media)
                                     <?php $ext = pathinfo($quiz->attach_media)['extension'] ?>
                                     @if($ext=='mp3'||$ext=='mp4')
-                                    <video style="width:100%;" controls="" name="media" style="{{$ext=='mp3'?'width:100%;height:50px':'max-height:300px;'}}">
+                                    <video controls="" name="media" style="{{$ext=='mp3'?'width:100%;height:50px':'max-height:300px;'}}">
                                         <source src="/{{$quiz->attach_media}}" type="{{$ext=='mp3'?'audio/mp3':'video/mp4'}}">
                                     </video>
                                     @else
@@ -201,7 +201,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Score</label>
+                            <label>Score (Max <span class="maxscore"></span>)</label>
                             <input type="number" name="quiz-grade" class="form-control" placeholder="" required="">
                         </div>
                     </div>
@@ -258,7 +258,7 @@
     $('input,textarea').prop('readonly', true);
     @endif
 
-            $('.total-review').click(function () {
+    $('.total-review').click(function () {
         var review = '';
         $.ajax({
         url:'/admin/review/historyinfo',
@@ -296,7 +296,7 @@
                 } else {
                     $('input[name=quiz-grade]').attr('max', r['grade']).val(r['mark'] ? r['mark'] : '0').prop('readonly', true);
                 }
-
+                $('.maxscore').text(r['grade']);
                 $('textarea[name=quiz-review]').val(r['comment'] ? r['comment'] : '');
                 $('.review-modal').modal();
             }
