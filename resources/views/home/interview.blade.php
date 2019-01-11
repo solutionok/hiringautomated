@@ -70,11 +70,13 @@
 <script type="text/javascript">
     async function startInterview(id){
         try {
-            const constraints = {audio: {echoCancellation: {exact: true}},video: {}};
+//            const constraints = {audio: true,video: true};
+            const constraints = {audio: true,video: true};
 
             const stream = await navigator.mediaDevices.getUserMedia(constraints);
             
         } catch (e) {
+            console.log(e.toString() )
             alert('Please check  your camera and microphone - (' +e.toString() + ')');
             return false;
         }

@@ -41,13 +41,13 @@ async function startRecord() {
     }catch(e){}
     
     const constraints = {
-        audio: {
-            //echoCancellation: {exact: hasEchoCancellation}
-            echoCancellation: {exact: true}
-        },
-        video: {
-            //width: 1280, height: 720
-        }
+        audio:true, video:true
+//        audio: {
+//            echoCancellation: {exact: true}
+//        },
+//        video: {
+//            //width: 1280, height: 720
+//        }
     };
 
     try {

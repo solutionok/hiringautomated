@@ -171,7 +171,7 @@
 </script>
 @if($quiz->qtype=='3' || $quiz->qtype=='4')
 <script src="/assets/javascripts/adapter.latest.js"></script>
-<script src="/assets/javascripts/interviewmain.js"></script>
+<script src="/assets/javascripts/interviewmain.js?190112"></script>
 @else
 <script>
   var timeLimitInterval = setInterval(function () {
