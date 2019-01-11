@@ -101,6 +101,10 @@ class AssessorController extends Controller
             }
             
             $savePath = $request->preview_image->store('app/assessor');
+            if(!is_dir(dirname($savePath))){
+                @mkdir(dirname($savePath));
+                @chmod(dirname($savePath), 0777);
+            }
             @unlink($savePath);
             @chmod(dirname($savePath), 0777);
             @rename($request->preview_image->path(), $savePath);

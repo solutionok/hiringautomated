@@ -189,7 +189,14 @@ class CandidateController extends Controller
         if (isset($_FILES['preview_image'])&&!$_FILES['preview_image']['error']) {
             $ext = strtolower(pathinfo($_FILES['preview_image']['name'])['extension']);
             $file = 'app/candidate/'.uniqid().'.'.$ext;
+            
+            
             $savePath = public_path().'/'.$file;
+            
+            if(!is_dir(dirname($savePath))){
+                @mkdir(dirname($savePath));
+                @chmod(dirname($savePath), 0777);
+            }
             @chmod(dirname($savePath), 0777);
             @unlink($savePath);
             rename($_FILES['preview_image']['tmp_name'], $savePath);
@@ -338,9 +345,15 @@ class CandidateController extends Controller
             $ext = strtolower(pathinfo($_FILES['cv-file']['name'])['extension']);
             $file = 'app/cv/'.uniqid().'.'.$ext;
             $savePath = public_path().'/'.$file;
+            
+            if(!is_dir(dirname($savePath))){
+                @mkdir(dirname($savePath));
+                @chmod(dirname($savePath), 0777);
+            }
+            
             @chmod(dirname($savePath), 0777);
             @unlink($savePath);
-            rename($_FILES['cv-file']['tmp_name'], $savePath);
+            @rename($_FILES['cv-file']['tmp_name'], $savePath);
             DB::table('users')
                     ->where('id', $request->input('candidate_id'))
                     ->update(['cv'=>$file]);

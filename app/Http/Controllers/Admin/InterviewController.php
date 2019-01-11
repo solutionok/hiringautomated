@@ -85,6 +85,11 @@ class InterviewController extends Controller
             
             $savePath = $request->preview_image->store('app/interview_image');
             @unlink($savePath);
+            
+            if(!is_dir(dirname($savePath))){
+                @mkdir(dirname($savePath));
+                @chmod(dirname($savePath), 0777);
+            }
             @chmod(dirname($savePath), 0777);
             @rename($request->preview_image->path(), $savePath);
             DB::table('interview')->where('id', $id)->update(['preview_image'=>$savePath]);

@@ -69,6 +69,11 @@ class QuizController extends Controller
             }
             $ext = strtolower(pathinfo($request->attach_media->getClientOriginalName())['extension']);
             $savePath = $request->attach_media->storeAs('app/quiz_media', uniqid().'.'.$ext);
+            
+            if(!is_dir(dirname($savePath))){
+                @mkdir(dirname($savePath));
+                @chmod(dirname($savePath), 0777);
+            }
             @chmod(dirname($savePath), 0777);
             @unlink($savePath);
             @rename($request->attach_media->path(), $savePath);
