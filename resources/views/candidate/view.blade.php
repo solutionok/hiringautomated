@@ -105,8 +105,9 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">
-                                    Interview |  
-                                    <button class="btn btn-sm btn-primary btn-circle interview-add" title="Assign new interview" onclick="return false;"><i class="fa fa-plus-circle"></i> </button>
+                                    Interview 
+<!--                                    |  
+                                    <button class="btn btn-sm btn-primary btn-circle interview-add" title="Assign new interview" onclick="return false;"><i class="fa fa-plus-circle"></i> </button>-->
                                     <input type="hidden" id="assigned_interview_ids" name="assigned_interview_ids" value="<?php echo implode(',', $interviewIds);?>">
                                 </label>
                                 <table class="table table-bordered text-center assigned-interview-table">
@@ -415,25 +416,25 @@
             return;
         }
         
-        var it = null;
-        for(i in interviews){
-            if(interviews[i]['id']==id){
-                it = interviews[i];
-                break;
+            var it = null;
+            for(i in interviews){
+                if(interviews[i]['id']==id){
+                    it = interviews[i];
+                    break;
+                }
             }
-        }
-        var html = '<tr itid="'+it['id']+'">'
-                 + '<td class="text-left">'
-                    + '<a href="javascript:;">'
-                        + '<img src="/'+(it['preview_image']?it['preview_image']:'app/interview_image/no-image.png')+'" style="width">'
-                        + it['name']
-                    + '</a>'
-                 + '</td>'
-                 + '<td>'+it['ctt']+'</td>'
-                 + '<td>-</td><td>-</td>'
-                 + '<td><a href="javascript:DeleteIT('+it['id']+');"><i class="fa fa-minus-circle"></i></a></td></tr>'
-         ;
-        $('.assigned-interview-table').append(html);
+            var html = '<tr itid="'+it['id']+'">'
+                     + '<td class="text-left">'
+                        + '<a href="javascript:;">'
+                            + '<img src="/'+(it['preview_image']?it['preview_image']:'app/interview_image/no-image.png')+'" style="width">'
+                            + it['name']
+                        + '</a>'
+                     + '</td>'
+                     + '<td>'+it['ctt']+'</td>'
+                     + '<td>-</td><td>-</td>'
+                     + '<td><a href="javascript:DeleteIT('+it['id']+');"><i class="fa fa-minus-circle"></i></a></td></tr>'
+             ;
+            $('.assigned-interview-table').append(html);
         
         $('#assigned_interview_ids').val($('#assigned_interview_ids').val()+','+id);
         $('.interview-modal').modal('hide');

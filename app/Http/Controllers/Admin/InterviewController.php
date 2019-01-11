@@ -96,7 +96,7 @@ class InterviewController extends Controller
             DB::table('interview_assessor')->insert(['interview_id'=>$id, 'assessor_id'=>$a]);
         }
         
-        return redirect('admin/interview')->with('success', 'Interview ' . ($request->input('interview_id')?'Updated':'Created'));
+        exit('<script>top.bootbox.alert("'.('Interview ' . ($request->input('interview_id')?'Updated':'Created')).'", function(){top.location.reload();});</script>');
     }
     
     public function deleteInterview(Request $request){

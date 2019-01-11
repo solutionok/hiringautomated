@@ -116,7 +116,7 @@
                             </div>
                             <div class="panel-body">
                                 @if($quiz->qtype=='3' || $quiz->qtype=='4')
-                                <video id="record-cam" autoplay></video>
+                                <video id="record-cam" autoplay  muted="muted"></video>
                                 @else
                                 <ul class="problem-list">
                                     <?php $qdetail = json_decode($quiz->qdetail) ?>
@@ -148,12 +148,13 @@
 <script>
     var timeLimit = {{$quiz -> qtime}};
     var preparationTime = {{$quiz -> qprepare}};
+    
     function tf(s){
-    if (s > 59){
-    return Number(s / 60).toFixed(0) + ' : ' + (s % 60 > 9 ? s % 60:('0' + s % 60));
-    }
+        if (s > 59){
+            return Math.floor(s / 60) + ' : ' + (s % 60 > 9 ? s % 60:('0' + s % 60));
+        }
 
-    return '00 : ' + (s % 60 > 9?s % 60:('0' + s % 60));
+        return '00 : ' + (s % 60 > 9?s % 60:('0' + s % 60));
     }
     
     function showOveray(msg){
@@ -166,6 +167,7 @@
     function hideOveray(msg){
         $.LoadingOverlay("text", msg);
     }
+    
 </script>
 @if($quiz->qtype=='3' || $quiz->qtype=='4')
 <script src="/assets/javascripts/adapter.latest.js"></script>

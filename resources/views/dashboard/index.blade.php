@@ -168,9 +168,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="/admin/quiz?it={{$q->interview_id}}">
-                                        {{$q->interviewn}}
-                                    </a>
+                                    <?php echo $q->interviewn?>
                                 </td>
                             </tr>
                             @endforeach

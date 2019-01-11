@@ -45,6 +45,27 @@
         color: #f96332!important;
         font-weight: bold!important;
     }
+    progress {
+        padding-top: 5px;
+        background-color: #fff;
+        border: 0;
+        height: 18px;
+        border-radius: 9px;
+        -webkit-appearance: none;
+   appearance: none;
+    }
+    progress[value]::-webkit-progress-bar {
+        background-color: #fff;
+        border: 0;
+        height: 18px;
+        border-radius: 9px;
+        background-color: #eee;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    progress[value]::-webkit-progress-value {
+background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 </style>
 @endsection
 @section('content')
@@ -80,7 +101,7 @@
                                 <img src="/{{!empty($candidate->photo)?$candidate->photo:'app/candidate/user.jpg'}}">
                                 <p>Name : {{$candidate->name}}</p>
                                 <p>Interview Time : {{date('d.m.Y', strtotime($history->rundate))}}</p>
-                                <!--<p><a href="/admin/candidate/{{$candidate->id}}" class="btn btn-sm btn-warning" style="margin:0">View more</a></p>-->
+                                <p>Evaluated : {{empty($history->reviewtime)?'Not yet':date('d.m.Y',strtotime($history->reviewtime))}}</p>
                             </div>
                         </div>
                         <div class="panel step-box">
@@ -199,10 +220,16 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <label>Score (Max <span class="maxscore"></span>)</label>
-                            <input type="number" name="quiz-grade" class="form-control" placeholder="" required="">
+                            <label>Score</label>
+                            <input type="number" name="quiz-grade" step="{{$quiz->grade/100}}" class="form-control" placeholder="" required="">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Max Score</label>
+                            <input type="number" class="form-control maxscore" readonly>
                         </div>
                     </div>
                 </div>
@@ -217,8 +244,8 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <input type="button" class="btn btn-primary set-grade-review" value="Save"> 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="button" class="btn btn-primary set-grade-review" value="Save">
             </div>
         </div>
     </div>
@@ -296,7 +323,7 @@
                 } else {
                     $('input[name=quiz-grade]').attr('max', r['grade']).val(r['mark'] ? r['mark'] : '0').prop('readonly', true);
                 }
-                $('.maxscore').text(r['grade']);
+                $('.maxscore').val(r['grade']);
                 $('textarea[name=quiz-review]').val(r['comment'] ? r['comment'] : '');
                 $('.review-modal').modal();
             }

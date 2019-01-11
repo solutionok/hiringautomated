@@ -36,7 +36,26 @@
     td.active-step a{
         color: #f96332!important;
         font-weight: bold!important;
+    }progress {
+        background-color: #fff;
+        border: 0;
+        height: 18px;
+        border-radius: 9px;
+        -webkit-appearance: none;
+   appearance: none;
     }
+    progress[value]::-webkit-progress-bar {
+        background-color: #fff;
+        border: 0;
+        height: 18px;
+        border-radius: 9px;
+        background-color: #eee;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+    }
+
+    progress[value]::-webkit-progress-value {
+background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 </style>
 @endsection
 @section('content')
@@ -69,7 +88,7 @@
                             <img src="/{{!empty($candidate->photo)?$candidate->photo:'app/candidate/user.jpg'}}">
                             <p>Name : {{$candidate->name}}</p>
                             <p>Interview Time : {{date('d.m.Y',strtotime($history->rundate))}}</p>
-                            <p>Evaluated : {{empty($history->evaluated)?'Not yet':'Yes'}}</p>
+                            <p>Evaluated : {{empty($history->reviewtime)?'Not yet':date('d.m.Y',strtotime($history->reviewtime))}}</p>
                         </div>
                     </div>
                     <div class="panel step-box">

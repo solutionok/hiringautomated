@@ -3,9 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/app/Http/Controllers/Admin/CandidateController.php</file>
-            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/resources/views/candidate/index.blade.php</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/resources/views/layouts/scripts.blade.php</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/.env</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/app/Helpers/utility_functions.php</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/resources/views/review/index.blade.php</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/app/Http/Controllers/Admin/DashboardController.php</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/routes/web.php</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/resources/views/interview/index.blade.php</file>
             <file>file:/D:/xampp/htdocs/jobportal/smartinterview/resources/views/dashboard/index.blade.php</file>
+            <file>file:/D:/xampp/htdocs/jobportal/smartinterview/resources/views/home/run.blade.php</file>
         </group>
     </open-files>
 </project-private>

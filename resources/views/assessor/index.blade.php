@@ -88,7 +88,7 @@
                         <th>E-mail</th>
                         <th>Phone</th>
                         <th style="display:none;">Description</th>
-                        <th>Assign  Date</th>
+                        <th style="display:none;">Register  Date</th>
                         <th>Interview</th>
                         <th class="text-center">Action</th>
                         </thead>
@@ -100,7 +100,7 @@
                                 <td>{{$q->email}}</td>
                                 <td>{{$q->phone}}</td>
                                 <td style="display:none;"><textarea _iid="{{$q->id}}">{{$q->summary}}</textarea></td>
-                                <td>{{date('d.m.Y', strtotime($q->created_at))}}</td>
+                                <td style="display:none;">{{date('d.m.Y', strtotime($q->created_at))}}</td>
                                 <td>{{interviewNames($q->interviewIds)}}</td>
                                 <td class="text-center">
                                     <div class="btn-group">

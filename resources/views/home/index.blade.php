@@ -3,7 +3,9 @@
 <!-- Masthead -->
 <header class="masthead text-center">
     <div class="overlay">
-
+        <!--<video height="100%" width="100%" controls autoplayr start="0" name="media">-->
+            <!--<source src="/assets/images/HiringAutomated.com.mp4" type="video/mp4" start="0"></video>-->
+                <!--<iframe src="/assets/images/HiringAutomated.com.mp4" height="100%" width="100%"></iframe>-->
     </div>
     <div class="container">
         <h1>Best Online Interview Software</h1>

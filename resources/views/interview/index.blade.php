@@ -78,7 +78,7 @@
                 <h5 class="modal-title">New Interview</h5>
             </div>
             <div class="modal-body">
-                <form id="create-interview-form" method="post" enctype="multipart/form-data">
+                <form id="create-interview-form" method="post" enctype="multipart/form-data" target="save-frame">
                     @csrf
                     <input type="hidden" name="interview_id">
                     <div class="row">
@@ -154,6 +154,7 @@
     </div>
 </div>
 @endsection
+<iframe name="save-frame" style="display:none;"></iframe>
 
 @section('scripts')
 <script src="/plugins/chosen_v1.8.7/chosen.jquery.min.js" type="text/javascript"></script>
