@@ -1,4 +1,4 @@
- @extends('layouts.page')
+@extends('layouts.page')
 @section('css')
 <link rel="stylesheet" href="/assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css" />
 <link href="/assets/vendor/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" >
