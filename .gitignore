@@ -6,6 +6,7 @@
 /storage/*.key
 .env
 /vendor
+/nbproject
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
