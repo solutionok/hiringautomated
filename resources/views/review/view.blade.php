@@ -223,13 +223,13 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Score</label>
-                            <input type="number" name="quiz-grade" step="{{$quiz->grade/100}}" class="form-control" placeholder="" required="">
+                            <input type="number" name="quiz-grade" step="{{isset($quiz->grade)?($quiz->grade/100):0.1}}" class="form-control" placeholder="" required="">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Max Score</label>
-                            <input type="number" class="form-control maxscore" readonly>
+                            <input type="number" value="{{isset($quiz->grade)?($quiz->grade):''}}" class="form-control maxscore" readonly>
                         </div>
                     </div>
                 </div>
