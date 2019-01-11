@@ -1,4 +1,4 @@
-@extends('layouts.page')
+ @extends('layouts.page')
 @section('css')
 <link rel="stylesheet" href="/assets/vendor/jquery-datatables-bs3/assets/css/datatables.css" />
 <style>

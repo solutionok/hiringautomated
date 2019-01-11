@@ -1,4 +1,4 @@
-@extends('layouts.page')
+ @extends('layouts.page')
 @section('css')
 <style>
     .panel-heading .toolbar{

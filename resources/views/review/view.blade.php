@@ -1,4 +1,4 @@
-@extends('layouts.page')
+ @extends('layouts.page')
 @section('css')
 <style>
     @media only screen and (max-width: 1000px){

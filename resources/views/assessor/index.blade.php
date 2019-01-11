@@ -6,7 +6,7 @@
         width: 35px;
         height:35px; 
         margin-right:10px;}
-    .image-trigger{
+    .image-trigger{ 
         position:relative;
         cursor: pointer;
         color:#fff;

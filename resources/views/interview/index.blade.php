@@ -1,4 +1,4 @@
-@extends('layouts.page')
+ @extends('layouts.page')
 
 @section('css')
 <link href="/plugins/chosen_v1.8.7/chosen.min.css" rel="stylesheet" >

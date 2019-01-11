@@ -1,4 +1,4 @@
-@extends('layouts.front')
+ @extends('layouts.front')
 @section('content')
 <!-- Masthead -->
 <header class="masthead text-center">

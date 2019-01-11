@@ -1,4 +1,4 @@
-
+ 
 <!-- Vendor -->
 <script src="/assets/vendor/jquery/jquery.js"></script>
 <script src="/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>

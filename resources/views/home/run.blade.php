@@ -1,4 +1,4 @@
-@extends('layouts.page')
+ @extends('layouts.page')
 @section('css')
 <style>
     .panel-heading{padding-bottom: 0;padding-top: 5px;}

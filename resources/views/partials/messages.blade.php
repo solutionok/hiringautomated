@@ -1,4 +1,4 @@
-@php
+ @php
 $authId = auth()->id();
 @endphp
 @if ($messages)
