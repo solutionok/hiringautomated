@@ -20,15 +20,15 @@
     <div class="col-sm-6">
         <form id="search-form">
             <div class="form-group">
-                <label class="col-md-3 control-label text-center"><h5 style="font-weight:bold;">Date range</h5></label>
+                <label class="col-md-3 control-label text-center"><h5 style="font-weight:bold; color:black;">Date range</h5></label>
                 <div class="col-md-6">
                     <div class="input-daterange input-group" data-plugin-datepicker="">
                         <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                         </span>
-                        <input type="text" class="form-control" name="startd" readonly="" value="{{LT2IT($searchDateRange[0])}}" style="cursor:initial">
-                        <span class="input-group-addon">to</span>
-                        <input type="text" class="form-control" name="endd" readonly="" value="{{LT2IT($searchDateRange[1])}}" style="cursor:initial">
+                        <input type="text" class="form-control" name="startd" readonly="" value="{{LT2IT($searchDateRange[0])}}" style="cursor:initial; background-color:#fcf3cf">
+                        <span class="input-group-addon">To</span>
+                        <input type="text" class="form-control" name="endd" readonly="" value="{{LT2IT($searchDateRange[1])}}" style="cursor:initial; background-color:#fcf3cf"">
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
     <div class="interview-list ">
         <div class="interview-head">
-            <h3 class="text-center interview-{{$v->id}}">{{$v->name}}</h3>
+            <h3 class="text-center interview-{{$v->id}}" style="background-color:#0000aa; color:#ffffff; font-family:Arial; font-weight:bold;">{{$v->name}}</h3>
             <div class="interview-thumbnail">
                 <div class="interview-thumbnail-inner">
                     <img src="/{{$v->preview_image?$v->preview_image:'app/interview_image/no-image.png'}}">
@@ -55,14 +55,14 @@
             </div>
         </div>
         <div class="inerview-body">
-            <h5 class='it-candidate'>Candidate : <a href='/admin/candidate?search-select={{$v->id}}' title="{{$v->candidateListTxt}}">{{($v->cc.' candidate')}}</a>, Close on <span> {{strtotime($v->ctt)?date('d.m.Y', strtotime($v->ctt)):''}}</span></h5>
-            <h5 class='it-assessor' ass='{{$v->ass}}'>Assessor : <a href='/admin/assessor?search-select={{$v->id}}' title="{{$v->assessorListTxt}}">{{($v->ac.' assessor')}}</a>, Close on <span>{{strtotime($v->att)?date('d.m.Y', strtotime($v->att)):''}}</span></h5>
-            <p class="it-description">{{$v->description}}</p>
+            <h5 class='it-candidate'><font style="color:#000000; font-weight:bold">Candidate: </font><a href='/admin/candidate?search-select={{$v->id}}' title="{{$v->candidateListTxt}}">{{($v->cc.' candidate')}}</a>,<font style="color:#000000; font-weight:bold"> Ends on: </font><span> {{strtotime($v->ctt)?date('d.m.Y', strtotime($v->ctt)):''}}</span></h5>
+            <h5 class='it-assessor' ass='{{$v->ass}}'><font style="color:#000000; font-weight:bold">Assessor: </font><a href='/admin/assessor?search-select={{$v->id}}' title="{{$v->assessorListTxt}}">{{($v->ac.' assessor')}}</a>, <font style="color:#000000; font-weight:bold">Ends on: </font><span>{{strtotime($v->att)?date('d.m.Y', strtotime($v->att)):''}}</span></h5>
+            <font style="color:#aa0000; font-weight:bold; font-size:120%">Instruction: </font><p class="it-description" style="color:#000000">{{$v->description}}</p>
             <div class="text-center">
-                <button class="btn btn-warning update-trigger btn-sm" _iid="{{$v->id}}"  data-toggle="modal" data-target=".interview-modal" title="Edit name of the Interview, assessor, description">Edit</button>
-                <a class="btn btn-success btn-sm" href="/admin/quiz?it={{$v->id}}" title="Edit Questions,time duration etc">Question</a>
-                <button class="btn btn-danger delete-trigger btn-sm" _iid="{{$v->id}}" title="Delete interview also will remove associated quizes too">Delete</button>
-                <a class="btn btn-info btn-sm" href="/admin/review?search-select={{$v->id}}" title="Explor interview result/reviews">Result</a>
+                <button class="btn btn-warning update-trigger btn-sm" _iid="{{$v->id}}"  data-toggle="modal" data-target=".interview-modal" title="Edit name of the Interview, Assessor, Description">Edit</button>
+                <a class="btn btn-success btn-sm" href="/admin/quiz?it={{$v->id}}" title="Edit Questions">Question</a>
+                <button class="btn btn-danger delete-trigger btn-sm" _iid="{{$v->id}}" title="Delete interview">Delete</button>
+                <a class="btn btn-info btn-sm" href="/admin/review?search-select={{$v->id}}" title="View Interview Result/Reviews">Result</a>
                 <!--<a class="btn btn-danger" href="/admin/interview/toggle?it={{$v->id}}" title="{{intval($v->active_status)?'Currently actived':'Currently inactived'}}">{{intval($v->active_status)?'Inactive':'Active'}}</a>-->
             </div>
         </div>
@@ -84,7 +84,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Name</label>
+                                <label style="color:black; font-weight:bold;">Interview Name</label>
                                 <input type="text" name="name" class="form-control" placeholder required>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Instruction</label>
+                                <label style="color:black; font-weight:bold;">Instruction</label>
                                 <textarea class="form-control" name="description" placeholder rows="2" required></textarea>
                             </div>
                         </div>
@@ -115,16 +115,16 @@
                         </div>
                         <div class="col-md-8 col-sm-12">
                             <div class="form-group">
-                                <label class="control-label">Candidate Time Period</label>
-                                <div class="input-daterange input-group" data-plugin-datepicker style="position:relative;">
+                                <label class="control-label" style="color:black; font-weight:bold;">Interview End Date</label>
+                                <div class="input-daterange input-group" data-plugin-datepicker>
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                     <input type="text" class="form-control" name="ctt" data-date-format="yyyy-mm-dd" style="cursor: initial;" autocomplete="off" readonly required>
                                     <span class="error text-danger error-ctt hide" style="position:absolute;left:240px;top:5px;width:100px;">Invalid date</span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label text-right">Assessor Time Period</label>
-                                <div class="input-daterange input-group" data-plugin-datepicker style="position:relative;">
+                                <label class="control-label text-right" style="color:black; font-weight:bold;">Assessment End Date</label>
+                                <div class="input-daterange input-group" data-plugin-datepicker>
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                     <input type="text" class="form-control" name="att" data-date-format="yyyy-mm-dd" style="cursor: initial;" autocomplete="off" readonly required>
                                     <span class="error text-danger error-att hide" style="position:absolute;left:240px;top:5px;width:100px;">Invalid date</span>
@@ -136,7 +136,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Assessor</label>
+                                <label style="color:black; font-weight:bold;">Assign Assessor</label>
                                 <select name="assessor[]" data-placeholder="Choose assessor..." class="form-control assessor-selector" multiple>
                                     <option></option>
                                     @foreach($assessors as $ass)

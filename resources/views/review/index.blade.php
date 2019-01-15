@@ -76,8 +76,8 @@ border-radius: 2px;
                         <input id="listenSlider2" type="hidden" value="{{$range}}" />
                     </div>
                 </div>
-                <label class="col-md-3 control-label text-center">Score Range</label>
-                <p class="output2">From <b class="min text-danger">{{$_range[0]}}</b>% To <b class="max text-danger">{{$_range[1]}}</b>%</p>
+                <label class="col-md-3 control-label text-center" style="font-weight:bold; color:#000000; font-size:18px">Set Score Range: </label>
+                <p class="output2" style="font-weight:bold; font-size:18px"><b class="min text-danger">{{$_range[0]}}</b>% - <b class="max text-danger">{{$_range[1]}}</b>%</p>
                 @endif
             </div>
         </form>
@@ -102,30 +102,30 @@ border-radius: 2px;
                 <div class="col-sm-5 text-right">
                     <img src="/{{$q->photo?$q->photo:'app/candidate/user.jpg'}}">
                 </div>
-                <div class="col-sm-7">
-                    <h5>{{$q->usern}}</h5>
+                <div class="col-sm-7" style="color:#28b463;">
+                    <h5><b>{{$q->usern}}</b></h5>
                     <p><i class="fa fa-envelope-square"></i> {{$q->email}}</p>
                     <p><i class="fa fa-phone"></i> {{$q->phone}}</p>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-sm-5 text-right"><p>Interview</p></div>
-                <div class="col-sm-7"><p>{{$q->interviewn}}</p></div>
+                <div class="col-sm-5 text-right"><p style="color:orange; font-weight:bold">Interview</p></div>
+                <div class="col-sm-7"><p style="color:#000000;">{{$q->interviewn}}</p></div>
             </div>
 
             <div class="row">
-                <div class="col-sm-5 text-right"><p>Date</p></div>
-                <div class="col-sm-7"><p>{{date('d.m.Y', strtotime($q->rundate))}}</p></div>
+                <div class="col-sm-5 text-right"><p style="color:orange; font-weight:bold">Date</p></div>
+                <div class="col-sm-7"><p style="color:#000000;">{{date('d.m.Y', strtotime($q->rundate))}}</p></div>
             </div>
 
             <div class="row">
-                <div class="col-sm-5 text-right"><p>Score/Max Score</p></div>
-                <div class="col-sm-7"><p>{{$q->grade}}/{{$q->availgrade}} &nbsp;&nbsp;&nbsp; <progress value="{{$q->grade}}" max="{{$q->availgrade}}"></progress></p></div>
+                <div class="col-sm-5 text-right"><p style="color:orange; font-weight:bold">Score/Max Score</p></div>
+                <div class="col-sm-7"><p style="color:#000000;">{{$q->grade}}/{{$q->availgrade}} &nbsp;&nbsp;&nbsp; <progress value="{{$q->grade}}" max="{{$q->availgrade}}"></progress></p></div>
             </div>
             <div class="row">
-                <div class="col-sm-5 text-right"><p>Close on</p></div>
-                <div class="col-sm-7"><p>{{date('d.m.Y', strtotime($q->att))}}</p></div>
+                <div class="col-sm-5 text-right"><p style="color:orange; font-weight:bold">Close on</p></div>
+                <div class="col-sm-7"><p style="color:#000000;">{{date('d.m.Y', strtotime($q->att))}}</p></div>
             </div>
             <hr>
             <div class="row">

@@ -19,13 +19,13 @@
                     </div>
                     <div class="widget-summary-col">
                         <div class="summary">
-                            <h4 class="title">Interviews</h4>
+                            <h4 class="title" style="color:#0000aa; font-weight:bold; font-size:24px">Interviews</h4>
                             <div class="info">
                                 <strong class="amount">{{$interviewCount}}</strong>
                             </div>
                         </div>
                         <div class="summary-footer">
-                            <a href="/admin/interview" class="text-muted text-uppercase">view all</a>
+                            <a href="/admin/interview" class="text-uppercase" style="color:#f84d00; font-weight:bold; font-size:12px">view all</a>
                         </div>
                     </div>
                 </div>
@@ -43,13 +43,13 @@
                     </div>
                     <div class="widget-summary-col">
                         <div class="summary">
-                            <h4 class="title">Reviews</h4>
+                            <h4 class="title" style="color:#0000aa; font-weight:bold; font-size:24px">Reviews</h4>
                             <div class="info">
                                 <strong class="amount">{{$reviewCount}}</strong>
                             </div>
                         </div>
                         <div class="summary-footer">
-                            <a href="/admin/review" class="text-muted text-uppercase">view all</a>
+                            <a href="/admin/review" class="text-uppercase" style="color:#f84d00; font-weight:bold; font-size:12px">view all</a>
                         </div>
                     </div>
                 </div>
@@ -67,13 +67,13 @@
                     </div>
                     <div class="widget-summary-col">
                         <div class="summary">
-                            <h4 class="title">Assessors</h4>
+                            <h4 class="title" style="color:#0000aa; font-weight:bold; font-size:24px">Assessors</h4>
                             <div class="info">
                                 <strong class="amount">{{$assessorCount}}</strong>
                             </div>
                         </div>
                         <div class="summary-footer">
-                            <a href="/admin/assessor" class="text-muted text-uppercase">view all</a>
+                            <a href="/admin/assessor" class="text-uppercase" style="color:#f84d00; font-weight:bold; font-size:12px">view all</a>
                         </div>
                     </div>
                 </div>
@@ -91,13 +91,13 @@
                     </div>
                     <div class="widget-summary-col">
                         <div class="summary">
-                            <h4 class="title">Candidates</h4>
+                            <h4 class="title" style="color:#0000aa; font-weight:bold; font-size:24px">Candidates</h4>
                             <div class="info">
                                 <strong class="amount">{{$candidateCount}}</strong>
                             </div>
                         </div>
                         <div class="summary-footer">
-                            <a href="/admin/candidate" class="text-muted text-uppercase">view all</a>
+                            <a href="/admin/candidate" class="text-uppercase" style="color:#f84d00; font-weight:bold; font-size:12px">view all</a>
                         </div>
                     </div>
                 </div>
@@ -109,21 +109,21 @@
 <div class="row">
     <div class="{{auth()->user()->isadmin==1?'col-md-6 col-sm-12':'col-md-12 col-sm-12'}}">
         <section class="panel">
-            <header class="panel-heading">
-                <h2 class="panel-title">
-                    Not reviewed interviews
+            <header class="panel-heading" style="background-color:#000088;">
+                <h2 class="panel-title" style="color:#ffffff; font-weight:bold; font-size:24px">
+                    Not Reviewed Interviews
                 </h2>
             </header>
-            <div class="panel-body">
+            <div class="panel-body" style="background-color:#73c6b6;">
                 <div class="table-responsive">
                     <table class="table mb-none">
-                        <thead class="">
+                        <thead class="" style="background-color:#4444dd; color:#ffffff; font-weight:bold;">
                         <th>S.No</th>
                         <th>Candidate</th>
                         <th>Interview</th>
-                        <th>Date</th>
+                        <th>Interview Date</th>
                         </thead>
-                        <tbody>
+                        <tbody style="background-color:#ffffff;">
                             @foreach($interviews as $i=>$q)
                             <tr>
                                 <td>{{$i+1}}</td>
@@ -145,20 +145,20 @@
     @if(auth()->user()->isadmin==1)
     <div class="col-md-6 col-sm-12">
         <section class="panel">
-            <header class="panel-heading">
-                <h2 class="panel-title">
-                    Not appeared candidates
+            <header class="panel-heading" style="background-color:#000088;">
+                <h2 class="panel-title" style="color:#ffffff; font-weight:bold; font-size:24px">
+                    Not Appeared Candidates
                 </h2>
             </header>
-            <div class="panel-body">
+            <div class="panel-body" style="background-color:#73c6b6;">
                 <div class="table-responsive">
                     <table class="table mb-none">
-                        <thead class="">
+                        <thead class="" style="background-color:#4444dd; color:#ffffff; font-weight:bold;">
                         <th>S.No</th>
                         <th>Candidate</th>
                         <th>Interview</th>
                         </thead>
-                        <tbody>
+                        <tbody style="background-color:#ffffff;">
                             @foreach($intTemplates as $i=>$q)
                             <tr>
                                 <td>{{$i+1}}</td>

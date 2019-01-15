@@ -43,8 +43,8 @@
 <div class="row">
     <div class="col-md-12">
         <div class="panel">
-            <div class="panel-heading">
-                <h4 class="panel-title">{{$interview->name}} Questions</h4>
+            <div class="panel-heading" style="background-color:#0000aa">
+                <h4 class="panel-title" style="color:#ffffff; font-weight:bold">{{$interview->name}} Questions</h4>
             </div>
             <div class="panel-body">
                 <p class="btn-bar">
@@ -54,13 +54,13 @@
 
                 <div class="table-responsive">
                     <table class="question-table table table-bordered table-striped mb-none dataTable no-footer">
-                        <thead>
-                        <th>#</th>
-                        <th>Questions</th>
-                        <th>Type</th>
-                        <th class="text-right">Preparation Time</th>
-                        <th class="text-right">Response Time</th>
-                        <th class="text-right">Maximum Score</th>
+                        <thead style="background-color:#5dade2; color:#000000; font-weight:bold">
+                        <th class="text-center">S. No.</th>
+                        <th class="text-center">Questions</th>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">Preparation Time</th>
+                        <th class="text-center">Response Time</th>
+                        <th class="text-center">Maximum Score</th>
                         <th class="text-center">Action</th>
                         </thead>
                         <tbody>
@@ -70,20 +70,20 @@
                             }
                             ?>
                             @foreach($quizList as $i=>$q)
-                            <tr>
+                            <tr style="color:#000000;">
                                 <td>{{$i+1}}</td>
                                 <td>{{$q->description}}</td>
                                 <td>{{$qtypes[$q->qtype]}}</td>
-                                <td class="text-right">{{$q->qprepare?s2ms($q->qprepare):'-'}}</td>
-                                <td class="text-right">{{$q->qtime?s2ms($q->qtime):'-'}}</td>
-                                <td class="text-right">{{$q->grade}}</td>
+                                <td class="text-center">{{$q->qprepare?s2ms($q->qprepare):'-'}}</td>
+                                <td class="text-center">{{$q->qtime?s2ms($q->qtime):'-'}}</td>
+                                <td class="text-center">{{$q->grade}}</td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <nobr>
-                                        <a class="btn btn-default btn-sm update-quiz-trigger" _iid="{{$q->id}}" title="Edit question, type time.."><i class="fa fas fa-edit"></i> </a>
+                                        <a class="btn btn-default btn-sm update-quiz-trigger" _iid="{{$q->id}}" title="Edit question"><i class="fa fas fa-edit"></i> </a>
                                         <a class="btn btn-default btn-sm delete-quiz-trigger" _iid="{{$q->id}}" title="Remove this question"><i class="fa fa-trash"></i> </a>
-                                        <a class="btn btn-default btn-sm" href="/admin/quiz/moveq/{{$q->id}}" title="Move up this question"><i class="fa fa-arrow-up"></i> </a>
-                                        <a class="btn btn-default btn-sm" href="/admin/quiz/moveq/-{{$q->id}}" title="Move down this question"><i class="fa fa-arrow-down"></i> </a>
+                                        <a class="btn btn-default btn-sm" href="/admin/quiz/moveq/{{$q->id}}" title="Move up"><i class="fa fa-arrow-up"></i> </a>
+                                        <a class="btn btn-default btn-sm" href="/admin/quiz/moveq/-{{$q->id}}" title="Move down"><i class="fa fa-arrow-down"></i> </a>
                                         </nobr>
                                     </div>
                                 </td>
@@ -112,7 +112,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Question</label>
+                                <label style="font-weight:bold; color:#000000">Question</label>
                                 <textarea style="width:100%;height:100px;" name="description" required=""></textarea>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                                     </div>
                                     
                                     <div class="col-md-4">
-                                        <label>Question Type</label>
+                                        <label style="font-weight:bold; color:#000000">Response Type</label>
                                         <select class="form-control" name="qtype" placeholder="" required="">
                                             @foreach($qtypes as $qtid=>$qtname)
                                             <option value="{{$qtid}}">{{$qtname}}</option>
@@ -141,28 +141,28 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3 choice-count">
-                                        <label>Choice Count</label>
-                                        <input type="number" max="10" min="2" class="form-control" value="2">
+                                        <label style="font-weight:bold; color:#000000">Number of Options</label>
+                                        <input type="number" max="10" min="2" class="form-control" value="4">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div><br>
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label>Maximum Score</label>
+                                        <label style="font-weight:bold; color:#000000">Maximum Score</label>
                                         <input name="grade" type="number" min="1" class="form-control" value="1" required="">
                                     </div>
                                     <div class="col-md-4">
-                                        <label>Preparation Time(mm:ss)</label>
+                                        <label style="font-weight:bold; color:#000000">Preparation Time(mm:ss)</label>
                                         <input name="qprepare" type="text" class="form-control">
                                     </div>
                                     <div class="col-md-4">
-                                        <label>Response Time(mm:ss)</label>
+                                        <label style="font-weight:bold; color:#000000">Response Time (mm:ss)</label>
                                         <input name="qtime" type="text" class="form-control" step="15" required="">
                                     </div>
                                 </div>
