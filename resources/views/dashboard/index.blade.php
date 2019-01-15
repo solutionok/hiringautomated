@@ -133,7 +133,7 @@
                                     </a>
                                 </td>
                                 <td>{{$q->interviewn}}</td>
-                                <td>{{$q->rundate}}</td>
+                                <td>{{LT2IT($q->rundate)}}</td>
                             </tr>
                             @endforeach
                         </tbody>

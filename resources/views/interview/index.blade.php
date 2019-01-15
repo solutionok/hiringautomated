@@ -116,16 +116,18 @@
                         <div class="col-md-8 col-sm-12">
                             <div class="form-group">
                                 <label class="control-label">Candidate Time Period</label>
-                                <div class="input-daterange input-group" data-plugin-datepicker>
+                                <div class="input-daterange input-group" data-plugin-datepicker style="position:relative;">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                     <input type="text" class="form-control" name="ctt" data-date-format="yyyy-mm-dd" style="cursor: initial;" autocomplete="off" readonly required>
+                                    <span class="error text-danger error-ctt hide" style="position:absolute;left:240px;top:5px;width:100px;">Invalid date</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label text-right">Assessor Time Period</label>
-                                <div class="input-daterange input-group" data-plugin-datepicker>
+                                <div class="input-daterange input-group" data-plugin-datepicker style="position:relative;">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                     <input type="text" class="form-control" name="att" data-date-format="yyyy-mm-dd" style="cursor: initial;" autocomplete="off" readonly required>
+                                    <span class="error text-danger error-att hide" style="position:absolute;left:240px;top:5px;width:100px;">Invalid date</span>
                                 </div>
                             </div>
                         </div>
@@ -159,8 +161,8 @@
 @section('scripts')
 <script src="/plugins/chosen_v1.8.7/chosen.jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+    var currentDate = '{{date('Ymd')}}';
     $.fn.datepicker.defaults.format = "dd.mm.yyyy";
-//    $.fn.datepicker.defaults.format = "yyyy-mm-dd";
     $('select[name="assessor[]"]').chosen({width: "95%"})
 
     $('.update-trigger').click(function (e) {
@@ -173,10 +175,19 @@
 
         var att = $('span', $(this).parent().siblings('.it-assessor')).text();
         var ctt = $('span', $(this).parent().siblings('.it-candidate')).text();
-
-        $('input[name="att"]').datepicker("setDate", att);
-        $('input[name="ctt"]').datepicker("setDate", ctt);
-
+        
+        if(ctt.split('.').reverse().join('')<currentDate){
+            $('input[name="ctt"]').val(ctt);
+        }else{
+            $('input[name="ctt"]').datepicker("setDate", ctt);
+        }
+        
+        if(att.split('.').reverse().join('')<currentDate){
+            $('input[name="att"]').val(att);
+        }else{
+            $('input[name="att"]').datepicker("setDate", att);
+        }
+        
         $('select[name="assessor[]"]').chosen().trigger("chosen:updated");
     });
 
@@ -186,6 +197,7 @@
         $('#create-interview-form input[name="interview_id"]').val('');
         $('#create-interview-form').trigger('reset');
         $('#create-interview-form select[name="assessor[]"]').val([]);
+        $('.error-att,.error-ctt').addClass('hide');
         $('select[name="assessor[]"]').chosen().trigger("chosen:updated");
     });
 
@@ -219,14 +231,20 @@
     $('#create-interview-form').submit(function(){
         if(!$('input[name="ctt"]').val()){
             alert('Please set time period for candidates.');
+            $('input[name="ctt"]').click()
             return false;
         }
 
         if(!$('input[name="att"]').val()){
             alert('Please set time period for assessors.');
+            $('input[name="att"]').click()
             return false;
         }
 
+        if(!$('.error-ctt').hasClass('hide') || !$('.error-att').hasClass('hide')){
+            return false;
+        }
+        
         return true;
     })
     
@@ -235,7 +253,17 @@
     })
     
     $('input[name="ctt"],input[name="att"]').on('changeDate', function(){
-         $(this).datepicker('hide');
-    })
+        if(arguments.length && !periodCheck(this.value)){
+            $(this).next().removeClass('hide');
+            return false;
+        }
+        $(this).datepicker('hide');
+        $(this).next().addClass('hide');
+        return true;
+    });
+    
+    function periodCheck(v){
+        return v.split('.').reverse().join('')>=currentDate;
+    }
 </script>
 @endsection

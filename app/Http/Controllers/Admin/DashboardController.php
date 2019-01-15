@@ -31,10 +31,12 @@ class DashboardController extends Controller
         $candidateCount = User::where('isadmin', 0)->count();
         
         $intTemplates = DB::table('interview_candidate as a')
-                ->leftJoin('interview_history as b', 'b.candidate_id', '=', 'a.candidate_id')
+                ->leftJoin('interview_history as b', function($join){
+                    return $join->on('b.candidate_id', '=', 'a.candidate_id')->where(DB::raw('b.id is null'));
+                })
                 ->join('interview as c', 'c.id', '=', 'a.interview_id')
                 ->join('users as d', 'd.id', '=', 'a.candidate_id')
-                ->whereRaw('b.id is null')
+                ->whereRaw('date(c.att)>date("'.date('Y-m-d', strtotime('-1 month')).'")')
                 ->select('a.*', 'd.photo', DB::raw('group_concat(c.name SEPARATOR "<br>") as interviewn'), 'd.name as candidaten')
                 ->groupBy('d.id')
                 ->orderBy('c.ctt', 'desc')

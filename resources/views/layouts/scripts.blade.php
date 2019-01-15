@@ -30,7 +30,7 @@
         return re.test(String(email).toLowerCase());
     }
     function validatePhone(phone) {
-        if(phone[0]=='0')return false;
+        if(phone[0]=='0' || phone.length!=10)return false;
         var re = /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g;
         return re.test(String(phone).toLowerCase());
     }

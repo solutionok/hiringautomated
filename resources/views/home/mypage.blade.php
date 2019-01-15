@@ -376,7 +376,7 @@
 
     $('#pass-save').submit(function () {
         if ($('input[name=new_password]').val() != $('input[name=new_password1]').val()) {
-            alert('New password not equal');
+            alert('Password Mismatch');
             return false;
         }
 

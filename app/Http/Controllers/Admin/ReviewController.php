@@ -127,10 +127,14 @@ class ReviewController extends Controller
                 ->where('a.quiz_id', $quiz ? $quiz->id : 0)
                 ->get();
         
+        $hasReview = DB::table('review as a')
+                ->where('a.interview_history_id', $id)
+                ->get()->count();
         return view('review.view',[
             'pageName'=>'review', 
             'reviews'=>$reviews, 
             'step'=>$step, 
+            'hasReview'=>$hasReview, 
             'steps'=>$steps, 
             'quiz'=>$quiz, 
             'history'=>$history, 

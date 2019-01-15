@@ -129,8 +129,7 @@ border-radius: 2px;
             </div>
             <hr>
             <div class="row">
-                <div class="col-sm-3 text-right"></div>
-                <div class="col-sm-9">
+                <div class="col-sm-12 text-center">
                     <a href="/admin/review/{{$q->id}}" class="btn btn-sm btn-{{deadlineCheck($q->att)?'primary':'dark'}}" title="{{auth()->user()->isadmin==2?'Evaluate score, review':'View review result, score, review so on'}}">{{deadlineCheck($q->att)?'View':'Deadline Over'}}</a>
                     @if(auth()->user()->isadmin==1)
                     <a href="/admin/candidate/view?id={{$q->candidate_id}}" class="btn btn-sm btn-primary" title="Go profile page">User Profile</a>

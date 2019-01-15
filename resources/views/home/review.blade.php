@@ -71,8 +71,8 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
                         </h4>
                     </div>
                     <div class="col-sm-12 text-right">
-                        Total Score :  <span title="evaluated interview score/maximium score">{{$history->grade}} / {{$history->availgrade}}</span>
-                        <progress value="{{$history->grade}}" max="{{$history->availgrade}}"></progress>
+                        Total Score :  <span title="evaluated interview score/maximium score">{{$hasReview?$history->grade:'-'}} / {{$history->availgrade}}</span>
+                        <progress value="{{$hasReview?$history->grade:0}}" max="{{$history->availgrade}}"></progress>
 
                         <button onclick="location.href='/home/interview'" class="btn btn-sm btn-warning" style="margin-top:-1px;margin-left: 10px;"><i class="fa fa-arrow-circle-left"></i> Interview List</button>
                     </div>
@@ -88,7 +88,7 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
                             <img src="/{{!empty($candidate->photo)?$candidate->photo:'app/candidate/user.jpg'}}">
                             <p>Name : {{$candidate->name}}</p>
                             <p>Interview Time : {{date('d.m.Y',strtotime($history->rundate))}}</p>
-                            <p>Evaluated : {{empty($history->reviewtime)?'Not yet':date('d.m.Y',strtotime($history->reviewtime))}}</p>
+                            <p>Evaluation : {{empty($hasReview)?'Not Reviewed':'Reviewed'}}</p>
                         </div>
                     </div>
                     <div class="panel step-box">
@@ -187,7 +187,7 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
                                     
                                 @endforeach
                             @else
-                            <p class="text-center blockquote blockquote-primary" style="">Not yet!</p>
+                            <p class="text-center blockquote blockquote-primary" style="">Not Reviewed</p>
                             @endif
                             
                         </div>

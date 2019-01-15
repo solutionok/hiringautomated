@@ -1,4 +1,4 @@
- @extends('layouts.page')
+@extends('layouts.page')
 @section('css')
 <style>
     @media only screen and (max-width: 1000px){
@@ -101,7 +101,7 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
                                 <img src="/{{!empty($candidate->photo)?$candidate->photo:'app/candidate/user.jpg'}}">
                                 <p>Name : {{$candidate->name}}</p>
                                 <p>Interview Time : {{date('d.m.Y', strtotime($history->rundate))}}</p>
-                                <p>Evaluated : {{empty($history->reviewtime)?'Not yet':date('d.m.Y',strtotime($history->reviewtime))}}</p>
+                                <p>Evaluation : {{empty($hasReview)?'Not Reviewed':'Reviewed'}}</p>
                             </div>
                         </div>
                         <div class="panel step-box">
@@ -200,7 +200,7 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 
                                 @endforeach
                                 @else
-                                <p class="text-center blockquote blockquote-primary" style="">Not yet!</p>
+                                <p class="text-center blockquote blockquote-primary" style="">Not Reviewed</p>
                                 @endif
 
                             </div>

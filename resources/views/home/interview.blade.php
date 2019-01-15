@@ -44,7 +44,7 @@
                                 <p class="text-lefta" style="min-height:50px;">{{$v->description}}</p>
                                 <h6>Close on : {{date('d.m.Y',strtotime($v->ctt))}}</h6>
                                 <h6>Total Score : {{$v->grade}}</h6>
-                                <h6>My  Score : {{intval($v->mygrade)}}</h6>
+                                <h6>My  Score : {{$v->reviewid?intval($v->mygrade):'Not Reviewed'}}</h6>
                                 <div>
                                     @if($v->hisid)
                                     <a class="btn btn-sm btn-warning" href="/home/review/{{$v->hisid}}">View Review</a>

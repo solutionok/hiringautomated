@@ -265,7 +265,7 @@ $('.delete-trigger').click(function () {
 
 $('#create-assessor-form').submit(function () {
     if ($('input[name=new_password]').val() != $('input[name=confirm_password]').val()) {
-        alert('New password not equal');
+        alert('Password Mismatch');
         return false;
     }
 

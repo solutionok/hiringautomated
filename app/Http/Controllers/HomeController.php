@@ -31,13 +31,14 @@ class HomeController extends Controller
             array_push($hasInterviewIds,-1);
             
             $re = DB::table('interview')
-                    ->select('interview.*', 'interview_history.id as hisid', 'interview_history.grade as mygrade', DB::raw('sum(quiz.grade) as grade'))
+                    ->select('interview.*', 'interview_history.id as hisid', 'review.id as reviewid', 'interview_history.grade as mygrade', DB::raw('sum(quiz.grade) as grade'))
                     ->join('interview_candidate','interview_candidate.interview_id','=','interview.id')
                     ->join('quiz','quiz.interview_id','=','interview.id')
                     ->leftJoin('interview_history', function($join) use ($uid){
                         return $join->on('interview_history.interview_id','=','interview.id')
                                 ->where('interview_history.candidate_id', $uid);
                     })
+                    ->leftJoin('review','review.interview_history_id','=','interview_history.id')
                     ->where('interview_candidate.candidate_id',$uid)
                     ->groupBy('interview.id')
                     ->get();
@@ -162,13 +163,13 @@ class HomeController extends Controller
             
             if($corrected==$correctCount){
                 $mark = $quiz['grade'];
-                echo 'Ok! your mark is ' . $mark;
+                echo 'Saved';
             }else if($corrected>0 && $corrected<$correctCount){
                 $mark = round($corrected/$correctCount*$quiz['grade'], 1);
-                echo 'Your mark is ' . $mark;
+                echo 'Saved';
             }else{
                 $mark = 0;
-                echo 'Your answer is incorrect!';
+                echo 'Saved';
             }
             
             $quiz['detail'] = $checked;
@@ -309,9 +310,14 @@ class HomeController extends Controller
                 ->where('a.quiz_id', $quiz ? $quiz->id : 0)
                 ->get();
         
+        $hasReview = DB::table('review as a')
+                ->where('a.interview_history_id', $id)
+                ->get()->count();
+        
         return view('home.review',[
             'pageName'=>'Interview', 
             'reviews'=>$reviews, 
+            'hasReview'=>$hasReview, 
             'step'=>$step, 
             'steps'=>$steps, 
             'quiz'=>$quiz, 
