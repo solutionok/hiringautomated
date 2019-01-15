@@ -18,7 +18,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
         <!-- Custom styles for this template -->
-        <link href="/assets/stylesheets/front.css?190105" rel="stylesheet">
+        <link href="/assets/stylesheets/front.css?190115" rel="stylesheet">
 
         @yield('css')
     </head>
@@ -60,7 +60,7 @@
                                 <a href="/home/about">ABOUT US</a>
                             </li>
                             <li>
-                                <a href="#">PRODUCT</a>
+                                <a href="/home/product">PRODUCT</a>
                             </li>
                             <li>
                                 <a href="#">FAQs</a>

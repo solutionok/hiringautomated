@@ -105,11 +105,11 @@ a:hover {
 .front-main .masthead {
   position: relative;
   background-color: #343a40;
-  background: url(../images/masthead.jpg) no-repeat center center;
+  background: url(../images/ScreenCapture.gif) no-repeat center center;
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
-  height: 470px; }
+  height: 500px; }
   .front-main .masthead .overlay {
     position: absolute;
     background-color: #000;

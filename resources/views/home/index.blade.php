@@ -1,20 +1,19 @@
- @extends('layouts.front')
+@extends('layouts.front')
 @section('content')
 <!-- Masthead -->
-<header class="masthead text-center">
+<header class="masthead text-center" style="height: 600px;">
     <div class="overlay">
-        <!--<video height="100%" width="100%" controls autoplayr start="0" name="media">-->
-            <!--<source src="/assets/images/HiringAutomated.com.mp4" type="video/mp4" start="0"></video>-->
-                <!--<iframe src="/assets/images/HiringAutomated.com.mp4" height="100%" width="100%"></iframe>-->
+        
     </div>
-    <div class="container">
+<!--    <div class="container">
+        
         <h1>Best Online Interview Software</h1>
         <h1>It now allows business users to conduct technical interviews. </h1>
         <h1>Using 'Hiring Automated'</h1>
         <p>
             <a class="demo-btn">REQUEST DEMO</a>
         </p>
-    </div>
+    </div>-->
 </header>
 
 <!-- Process Grid -->
@@ -77,7 +76,7 @@
 
 <!-- Thumbs Grid -->
 <section class="thumbs">
-    <div class="container">
+    <div class="container mt-lg mb-lg">
         <div class="row">
             <div class="col-md-3">
                 <img src="/assets/images/thumbs-1.jpg">
@@ -168,4 +167,13 @@
         </div>
     </div>
 </section>
+<script>
+    window.onload = function(){
+        
+//var v = document.getElementsByTagName('video')[0];
+//v.autoplay = true;
+//v.load();
+//;
+    }
+</script>
 @endsection
