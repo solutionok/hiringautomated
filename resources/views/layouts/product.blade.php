@@ -2,12 +2,9 @@
 @section('content')
 
 <!-- Masthead -->
-<header class="masthead text-center">
+<header class="masthead text-center" style="height: 600px;">
     <div class="overlay">
-
-    </div>
-    <div class="container">
-        <h1>PRODUCT</h1>
+        
     </div>
 </header>
 

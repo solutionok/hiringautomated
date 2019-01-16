@@ -73,15 +73,15 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 <div class="row">
     <div class="col-md-12">
         <div class="panel">
-            <div class="panel-heading">
-                <div class="row">
+            <div class="panel-heading" style="background-color:#0000aa">
+                <div class="row" >
                     <div class="col-sm-12">
-                        <h4 class="panel-title">
+                        <h4 class="panel-title" style="color:#ffffff">
                             {{empty($interview)?'Interview damaged':$interview->name}}
                         </h4>
                     </div>
-                    <div class="col-sm-12 text-right">
-                        Total Score :  <span title="evaluated interview score/available score">{{$history->grade}} / {{$history->availgrade}}</span>
+                    <div class="col-sm-12 text-right" style="color:#ffffff; font-size:18px; foont:weight:bold">
+                        Total Score :  {{$history->grade}} / {{$history->availgrade}}</span>
                         <progress value="{{$history->grade}}" max="{{$history->availgrade}}"></progress>
 
                         <button onclick="location.href = '/admin/review';" class="btn btn-sm btn-primary" style="margin-top:-1px;margin-left: 10px;"><i class="fa fa-arrow-circle-left"></i> Interview List</button>
@@ -92,22 +92,32 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
                     </div>
                 </div>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" style="background-color:#ebdef0">
                 <div class="row">
-
                     <div class="col-md-5">
                         <div class="panel candidate-box">
                             <div class="panel-body">
                                 <img src="/{{!empty($candidate->photo)?$candidate->photo:'app/candidate/user.jpg'}}">
-                                <p>Name : {{$candidate->name}}</p>
-                                <p>Interview Time : {{date('d.m.Y', strtotime($history->rundate))}}</p>
-                                <p>Evaluation : {{empty($hasReview)?'Not Reviewed':'Reviewed'}}</p>
+								
+								
+									<div class="text-left"><p><font style="color:#fc532a; font-weight:bold; font-size:16px">Name: </font>
+									<font style="color:#000000;; font-size:16px">{{$candidate->name}}</font></p></div>
+									
+									<div class="text-left"><p><font style="color:#fc532a; font-weight:bold; font-size:16px">Interview Date: </font>
+									<font style="color:#000000;; font-size:16px">{{date('d.m.Y', strtotime($history->rundate))}}</font></p></div>
+									
+									<div class="text-left"><p><font style="color:#fc532a; font-weight:bold; font-size:16px">Evaluation: </font>
+									<font style="color:#000000;; font-size:16px">{{empty($hasReview)?'Not Reviewed':'Reviewed'}}</font></p></div>
+								
+                                <!--<p>Name : {{$candidate->name}}</p>
+                                <p>Interview Date : {{date('d.m.Y', strtotime($history->rundate))}}</p>
+                                <p>Evaluation : {{empty($hasReview)?'Not Reviewed':'Reviewed'}}</p>-->
                             </div>
                         </div>
                         <div class="panel step-box">
                             <div class="panel-body">
                                 <table class="table">
-                                    <thead>
+                                    <thead style="color:#fc532a; font-weight:bold; font-size:16px">
                                     <th>
                                         Questions 
                                         <!--<a href="/admin/review/{{$history->id}}" class="btn btn-warning btn-sm" style="float:right;">Show Interview Review</a>-->
@@ -116,7 +126,7 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
                                     <tbody>
                                         @foreach($steps as $i=>$q)
                                         <tr>
-                                            <td class='{{$step==($i+1)?'active-step':''}}'><a href="/admin/review/{{$history->id}}/{{$i+1}}">{{substr($q->description,0, 60)}}</a></td>
+                                            <td class='{{$step==($i+1)?'active-step':''}}' style="color:#000000; font-size:14px"><a href="/admin/review/{{$history->id}}/{{$i+1}}">{{substr($q->description,0, 60)}}</a></td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -131,9 +141,9 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
                                 @if($step)
                                 <!--Answer Head-->
                                 <h5>
-                                    Answer
+                                    <font style="color:#fc532a; font-size:18px; font-weight:bold;">Answer</font>
                                     <div>
-                                        Score : <span title="Evaluated score / Maximium score">{{empty($quiz->mark)?'0':$quiz->mark}} / {{empty($quiz->grade)?'0':$quiz->grade}}</span>
+                                        <font style="color:#000000; font-weight:bold">Score : {{empty($quiz->mark)?'0':$quiz->mark}} / {{empty($quiz->grade)?'0':$quiz->grade}}</font></span>
                                         @if(auth()->user()->isadmin==2 && deadlineCheck($interview->att))
                                         &nbsp;&nbsp;&nbsp;
                                         <button class="btn btn-primary btn-sm set-mark-trigger" 
@@ -170,8 +180,8 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 
                                 <!--Quiz--> 
                                 <div class="quiz">
-                                    <h5>Quiz</h5>
-                                    <p>{{$quiz->description}}</p>
+                                    <h5 style="color:#fc532a; font-size:16px; font-weight:bold;">Question</h5>
+                                    <p style="color:#000000; font-size:14px;">{{$quiz->description}}</p>
                                     @if($quiz->attach_media)
                                     <?php $ext = pathinfo($quiz->attach_media)['extension'] ?>
                                     @if($ext=='mp3'||$ext=='mp4')
@@ -186,16 +196,18 @@ background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
                                 @endif 
 
 
-                                <h5>Feedback</h5>
+                                <h5 style="color:#fc532a; font-weight:bold; font-size:16px">Review</h5>
                                 @if(count($reviews))
                                 @foreach($reviews as $re)
                                 <p class="blockquote blockquote-warning">
-                                    <img src="/{{$re->photo?$re->photo:'app/assessor/user.jpg'}}" style="width:30px;height:30px;margin:10px;"/>
-                                    <b>{{$re->assessorn}}</b>
-                                    <br>
-                                    <span style="color:#555;">
+									<span style="color:#000000;">
                                         <?php echo nl2br($re->comment) ?>
-                                    </span>
+                                    </span><br>
+								
+                                   <!-- <img src="/{{$re->photo?$re->photo:'app/assessor/user.jpg'}}" style="width:30px;height:30px;margin:10px;text-align:right"/>-->
+                                    <font style="color:#000000; font-size:14px; text-align:right"><b>{{$re->assessorn}}</b></font>
+									
+                                    
                                 </p>
 
                                 @endforeach

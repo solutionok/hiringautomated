@@ -253,7 +253,7 @@ $('#preview_image').change(function () {
 });
 $('.delete-trigger').click(function () {
     var id = $(this).attr('_iid');
-    bootbox.confirm("Are you realy delete this assessor?", function (result) {
+    bootbox.confirm("Are you sure you want to delete this assessor?", function (result) {
         if (result) {
             $.post('/admin/assessor/remove', {'id': id, _token: $('input[name=_token]').val()}, function (r) {
                 location.reload();

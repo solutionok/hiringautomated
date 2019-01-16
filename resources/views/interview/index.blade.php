@@ -20,7 +20,7 @@
     <div class="col-sm-6">
         <form id="search-form">
             <div class="form-group">
-                <label class="col-md-3 control-label text-center"><h5 style="font-weight:bold; color:black;">Date range</h5></label>
+                <label class="col-md-3 control-label text-center"><h5 style="font-weight:bold; color:black;">Date Range</h5></label>
                 <div class="col-md-6">
                     <div class="input-daterange input-group" data-plugin-datepicker="">
                         <span class="input-group-addon">
@@ -59,7 +59,7 @@
             <h5 class='it-assessor' ass='{{$v->ass}}'><font style="color:#000000; font-weight:bold">Assessor: </font><a href='/admin/assessor?search-select={{$v->id}}' title="{{$v->assessorListTxt}}">{{($v->ac.' assessor')}}</a>, <font style="color:#000000; font-weight:bold">Ends on: </font><span>{{strtotime($v->att)?date('d.m.Y', strtotime($v->att)):''}}</span></h5>
             <font style="color:#aa0000; font-weight:bold; font-size:120%">Instruction: </font><p class="it-description" style="color:#000000">{{$v->description}}</p>
             <div class="text-center">
-                <button class="btn btn-warning update-trigger btn-sm" _iid="{{$v->id}}"  data-toggle="modal" data-target=".interview-modal" title="Edit name of the Interview, Assessor, Description">Edit</button>
+                <button class="btn btn-warning update-trigger btn-sm" _iid="{{$v->id}}"  data-toggle="modal" data-target=".interview-modal" title="Edit name of the Interview, Assessor, Instruction">Edit</button>
                 <a class="btn btn-success btn-sm" href="/admin/quiz?it={{$v->id}}" title="Edit Questions">Question</a>
                 <button class="btn btn-danger delete-trigger btn-sm" _iid="{{$v->id}}" title="Delete interview">Delete</button>
                 <a class="btn btn-info btn-sm" href="/admin/review?search-select={{$v->id}}" title="View Interview Result/Reviews">Result</a>
@@ -202,7 +202,7 @@
     });
 
     $('.delete-trigger').click(function (e) {
-        if (!confirm('Are you sure delete this interview?'))
+        if (!confirm('Are you sure you want to delete this interview?'))
             return;
 
         $.get('/admin/interview/delete', {id: $(this).attr('_iid')}, function (id) {

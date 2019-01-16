@@ -56,15 +56,15 @@ border-radius: 2px;
         <form id="date-search-form">
             <div class="form-group">
                 @if(!$searchInterviewId)
-                <label class="col-md-3 control-label text-center"><h5 style="font-weight:bold;">Date range</h5></label>
+				<label class="col-md-3 control-label text-center"><h5 style="font-weight:bold; color:black;">Date Range</h5></label>
                 <div class="col-md-6">
                     <div class="input-daterange input-group" data-plugin-datepicker="">
                         <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                         </span>
-                        <input type="text" class="form-control" name="startd" readonly="" value="{{LT2IT($searchDateRange[0])}}" style="cursor:initial">
-                        <span class="input-group-addon">to</span>
-                        <input type="text" class="form-control" name="endd" readonly="" value="{{LT2IT($searchDateRange[1])}}" style="cursor:initial">
+                        <input type="text" class="form-control" name="startd" readonly="" value="{{LT2IT($searchDateRange[0])}}" style="cursor:initial; background-color:#fcf3cf">
+                        <span class="input-group-addon">To</span>
+                        <input type="text" class="form-control" name="endd" readonly="" value="{{LT2IT($searchDateRange[1])}}" style="cursor:initial; background-color:#fcf3cf"">
                     </div>
                 </div>
                 @else
@@ -97,7 +97,7 @@ border-radius: 2px;
 <?php if($i%3==0){echo ($i?'</div>':'').'<div class="row">';}?>
 <div class="col-md-4">
     <div class="panel">
-        <div class="panel-body">
+        <div class="panel-body" style="background-color:#ebdef0">
             <div class="row">
                 <div class="col-sm-5 text-right">
                     <img src="/{{$q->photo?$q->photo:'app/candidate/user.jpg'}}">
@@ -110,29 +110,29 @@ border-radius: 2px;
             </div>
             <hr>
             <div class="row">
-                <div class="col-sm-5 text-right"><p style="color:orange; font-weight:bold">Interview</p></div>
+                <div class="col-sm-5 text-right"><p style="color:#fc532a; font-weight:bold">Interview</p></div>
                 <div class="col-sm-7"><p style="color:#000000;">{{$q->interviewn}}</p></div>
             </div>
 
             <div class="row">
-                <div class="col-sm-5 text-right"><p style="color:orange; font-weight:bold">Date</p></div>
+                <div class="col-sm-5 text-right"><p style="color:#fc532a; font-weight:bold">Date</p></div>
                 <div class="col-sm-7"><p style="color:#000000;">{{date('d.m.Y', strtotime($q->rundate))}}</p></div>
             </div>
 
             <div class="row">
-                <div class="col-sm-5 text-right"><p style="color:orange; font-weight:bold">Score/Max Score</p></div>
+                <div class="col-sm-5 text-right"><p style="color:#fc532a; font-weight:bold">Score/Max Score</p></div>
                 <div class="col-sm-7"><p style="color:#000000;">{{$q->grade}}/{{$q->availgrade}} &nbsp;&nbsp;&nbsp; <progress value="{{$q->grade}}" max="{{$q->availgrade}}"></progress></p></div>
             </div>
             <div class="row">
-                <div class="col-sm-5 text-right"><p style="color:orange; font-weight:bold">Close on</p></div>
+                <div class="col-sm-5 text-right"><p style="color:#fc532a; font-weight:bold">Ends on</p></div>
                 <div class="col-sm-7"><p style="color:#000000;">{{date('d.m.Y', strtotime($q->att))}}</p></div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-sm-12 text-center">
-                    <a href="/admin/review/{{$q->id}}" class="btn btn-sm btn-{{deadlineCheck($q->att)?'primary':'dark'}}" title="{{auth()->user()->isadmin==2?'Evaluate score, review':'View review result, score, review so on'}}">{{deadlineCheck($q->att)?'View':'Deadline Over'}}</a>
+                    <a href="/admin/review/{{$q->id}}" class="btn btn-sm btn-{{deadlineCheck($q->att)?'primary':'dark'}}" title="{{auth()->user()->isadmin==2?'Evaluate score, review':'View Reviews and Results'}}">{{deadlineCheck($q->att)?'View':'Deadline Over'}}</a>
                     @if(auth()->user()->isadmin==1)
-                    <a href="/admin/candidate/view?id={{$q->candidate_id}}" class="btn btn-sm btn-primary" title="Go profile page">User Profile</a>
+                    <a href="/admin/candidate/view?id={{$q->candidate_id}}" class="btn btn-sm btn-primary" title="View Profile">User Profile</a>
                     @endif
                 </div>
             </div>

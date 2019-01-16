@@ -182,7 +182,7 @@ $('#bulkadd').change(function () {
 })
 $('.delete-trigger').click(function () {
     var id = $(this).attr('_iid');
-    bootbox.confirm("Are you realy delete this candidate?", function (result) {
+    bootbox.confirm("Are you sure you want to delete this candidate?", function (result) {
         if (result) {
             $.post('/admin/candidate/delete', {'id': id, _token: $('input[name=_token]').val()}, function (r) {
                 location.reload();
@@ -253,7 +253,7 @@ function blukDelete(){
         return;
     }
     
-    if(!confirm('Are you realy delete checked candiates?'))return false;
+    if(!confirm('Are you sure you want to delete checked candiates?'))return false;
     
     var ids = [];
     $('.checked-candidate:checked').each(function(i, el){

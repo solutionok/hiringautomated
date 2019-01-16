@@ -25,7 +25,7 @@
 
     <body class="{{isset($pageClass)?$pageClass:''}}">
         <!--pre headers-->
-        <div class="pre-header">
+        <!--<div class="pre-header">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         
         <!-- Navigation -->
         <nav class="navbar">
@@ -63,10 +63,10 @@
                                 <a href="/home/product">PRODUCT</a>
                             </li>
                             <li>
-                                <a href="#">FAQs</a>
+                                <a href="#">SUPPORT</a>
                             </li>
                             <li>
-                                <a href="#">SUPPORT</a>
+                                <a href="#">CONTACT</a>
                             </li>
                             <li>
                                 @if(!isset(auth()->user()->isadmin))

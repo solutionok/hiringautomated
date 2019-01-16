@@ -62,9 +62,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-7">
-                <h3>Smarter, Faster Recruitment</h3>
-                <p>
-                    1Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum..
+                <h2>Smarter, Faster Recruitment</h2>
+                <p style="font-size: 1.3em;">
+                    Video interviewing from Hiringautomated makes panellists to replicate a live interview by replacing the early-stage phone, Skype or face-to-face interviews. Panellists and candidates are not online at the same time. There is no more scheduling of interviews while trying to fix time zone restriction. It has a set of simple screening questions that makes the panellist identify the candidates that meet their criteria almost immediately thus selecting the most suitable. 
                 </p>
             </div>
             <div class="col-sm-5">
@@ -76,7 +76,7 @@
 
 <!-- Thumbs Grid -->
 <section class="thumbs">
-    <div class="container mt-lg mb-lg">
+    <div class="container">
         <div class="row">
             <div class="col-md-3">
                 <img src="/assets/images/thumbs-1.jpg">
@@ -103,65 +103,58 @@
             <div class="col-md-3">
                 <div class="item">
                     <p>
-                        <img src="/assets/images/front-process-1.png">
+                        <img src="/assets/images/fifthapps.JPG">
                         <span class="name">
-                            David Zhu
-
+                            Khmaiss Ahmed
                         </span>
-                        <span class="job">SEO</span>
+                        <span class="job">CEO, Fifthapps, fifthapps.com</span>
                     </p>
                     <blockquote>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                     I have embedded HiringAutomated Application in the Career section of my company’s website so that along with the CV, candidates can also upload a quick interview which enables me to check their subject knowledge.
                     </blockquote>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item">
                     <p>
-                        <img src="/assets/images/front-process-1.png">
+                        <img src="/assets/images/shewtasingh.jpg">
                         <span class="name">
-                            David Zhu
-
+                            Shweta Singh
                         </span>
-                        <span class="job">SEO</span>
+                        <span class="job"> Director, Competent Chase</span>
                     </p>
                     <blockquote>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    I run Competent Chase where I prepare candidates as per the requirement of the jobs. HiringAutomated allows me to conduct and record mock interviews which I analyze later by viewing the recorded interviews and plan accordingly. They learn how to be natural and calm during an interview. HiringAutomated help candidates in confidence building which is one of the major factors for selection.
+
                     </blockquote>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item">
                     <p>
-                        <img src="/assets/images/front-process-1.png">
+                        <img src="/assets/images/ragatutions.jpg">
                         <span class="name">
-                            David Zhu
-
+                            Sreelakshmi Bodapadu
                         </span>
-                        <span class="job">SEO</span>
+                        <span class="job">Director (Operations), Raga Tutuion, ragatuition.com</span>
                     </p>
                     <blockquote>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    It helps me in shortlisting the tutors based on their communication, skills and subject knowledge. This application provides me with a ready database of tutors with their CV and videos which enables me to fulfill the parent’s demand precisely.
                     </blockquote>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="item">
                     <p>
-                        <img src="/assets/images/front-process-1.png">
+                        <img src="/assets/images/xlri.jpg">
                         <span class="name">
-                            David Zhu
-
+                            XLRI
                         </span>
-                        <span class="job">SEO</span>
+                        <span class="job">Placement Department</span>
                     </p>
-                    <blockquote>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    </blockquote>
+                    
+                    <blockquote>We had been looking for an application so that our students could have a practice interview before facing the placement interview. This application is exactly what we were looking for, we can create the interview based on our requirements, students can take it anytime as per their convenience and assessors can provide feedback for each question as well as for the complete interview. This would surely help our students to face the placement interviews.</blockquote>
+                    
                 </div>
             </div>
         </div>

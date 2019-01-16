@@ -83,11 +83,11 @@
 <script type="text/javascript">
     $('.change-password').click(function(){
         if(!$('#current_password').val()){
-            alert('Enter current password!');
+            alert('Enter Current Password!');
             return false;
         }
         if($('#new_password').val()!=$('#confirm_password').val()){
-            alert('not equal new password!');
+            alert('Password Mismatch!');
             return false;
         }
         
@@ -100,7 +100,7 @@
             'type' : 'post',
             'success' : function(r){
                 if(r!='ok'){
-                    alert('Incorrect current password!');
+                    alert('Incorrect Current Password!');
                     re = false;
                 }else{
                     re = true;
