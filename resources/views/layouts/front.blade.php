@@ -24,27 +24,6 @@
     </head>
 
     <body class="{{isset($pageClass)?$pageClass:''}}">
-        <!--pre headers-->
-        <!--<div class="pre-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h6>Email : info@hiringautomated.com</h6>
-                    </div>
-                    <div class="col-sm-6">
-                        <ul class="text-right">
-                            <li>
-                                <a href="#">Contact Sales</a>
-                            </li>
-                            <li>
-                                <a href="#">Get Support</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-        
         <!-- Navigation -->
         <nav class="navbar">
             <div class="container">
@@ -66,7 +45,7 @@
                                 <a href="#">SUPPORT</a>
                             </li>
                             <li>
-                                <a href="#">CONTACT</a>
+                                <a href="/home/contact">CONTACT</a>
                             </li>
                             <li>
                                 @if(!isset(auth()->user()->isadmin))

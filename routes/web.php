@@ -18,6 +18,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::view('/home/about', 'home.about', ['pageClass'=>'about-us']);
 Route::view('/home/product', 'home.product', ['pageClass'=>'product']);
+Route::view('/home/contact', 'home.contact', ['pageClass'=>'contact']);
 
 Route::get('/register/emailcheck/{email}', 'Auth\RegisterController@mailchk');
 
